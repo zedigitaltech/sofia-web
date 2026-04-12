@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Sofia AI</title>
+  <meta name="description" content="Manage your Sofia AI receptionist. View your plan, knowledge base, and account settings.">
+  <meta name="theme-color" content="#8B5CF6">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            violet: '#8B5CF6',
+            'violet-light': '#A78BFA',
+            'violet-dark': '#7C3AED',
+            'violet-bg': '#F5F3FF',
+            dark: '#0F0D1A',
+            'dark-subtle': '#1A1726',
+            success: '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .chat-bubble-sofia { background: #F5F3FF; border-radius: 16px 16px 16px 4px; }
+    .chat-bubble-user { background: #8B5CF6; color: white; border-radius: 16px 16px 4px 16px; }
+    .typing-dot { animation: typingBounce 1.4s infinite ease-in-out; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+
+  <!-- Nav -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-violet rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-sm">S</span>
+        </div>
+        <span class="text-xl font-bold text-dark">Sofia <span class="text-violet">AI</span></span>
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-sm text-gray-500 hover:text-violet transition">&larr; Home</a>
+        <button id="logout-btn" class="hidden text-sm text-gray-400 hover:text-red-500 transition">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-2xl mx-auto px-6 py-12">
+
+    <!-- LOGIN VIEW -->
+    <section id="login-view" class="fade-in">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-violet/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-dark mb-2">Access Your Dashboard</h1>
+        <p class="text-gray-500">Enter your email to receive a secure login link.</p>
+      </div>
+
+      <form id="login-form" class="space-y-4 max-w-sm mx-auto">
+        <div>
+          <input type="email" id="login-email" required
+            class="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet focus:border-violet outline-none transition text-center"
+            placeholder="you@business.com">
+        </div>
+        <button type="submit" id="login-btn"
+          class="w-full bg-violet hover:bg-violet-dark text-white font-semibold py-3.5 rounded-xl transition shadow-lg shadow-violet/25 hover:shadow-violet/40">
+          Send Magic Link
+        </button>
+      </form>
+
+      <!-- Success State -->
+      <div id="login-success" class="hidden max-w-sm mx-auto mt-6 text-center fade-in">
+        <div class="bg-green-50 border border-green-200 rounded-xl p-5">
+          <svg class="w-8 h-8 text-success mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          <p class="text-sm font-semibold text-green-700 mb-1">Check your inbox!</p>
+          <p class="text-xs text-green-600">We sent a login link to <strong id="sent-email"></strong>. It expires in 15 minutes.</p>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="login-error" class="hidden max-w-sm mx-auto mt-4 text-center">
+        <p class="text-sm text-red-500" id="login-error-text"></p>
+      </div>
+
+      <p class="text-center text-xs text-gray-400 mt-8">Don't have an account? <a href="pricing.html" class="text-violet hover:underline">Get started</a></p>
+    </section>
+
+    <!-- VERIFYING STATE -->
+    <section id="verifying-view" class="hidden fade-in">
+      <div class="text-center py-20">
+        <div class="w-12 h-12 bg-violet/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-violet animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+        </div>
+        <p class="text-gray-500 text-sm">Verifying your login link...</p>
+      </div>
+    </section>
+
+    <!-- DASHBOARD VIEW -->
+    <section id="dashboard-view" class="hidden fade-in">
+
+      <!-- Header Card -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden mb-4">
+        <div class="bg-dark px-6 py-5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-violet rounded-full flex items-center justify-center">
+              <span class="text-white font-bold">S</span>
+            </div>
+            <div>
+              <p class="text-white font-semibold text-lg" id="dash-biz-name">Your Business</p>
+              <span id="dash-status-badge" class="inline-flex items-center gap-1.5">
+                <span class="w-2 h-2 bg-success rounded-full"></span>
+                <span class="text-xs text-success">Active</span>
+              </span>
+            </div>
+          </div>
+          <span class="text-xs text-white/30 font-mono" id="dash-account-id"></span>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="grid grid-cols-3 gap-3 mb-4">
+        <button onclick="showStep(2)" class="bg-white border border-gray-200 hover:border-violet text-gray-700 hover:text-violet font-medium py-3 rounded-xl transition text-sm">
+          Edit Knowledge
+        </button>
+        <button id="toggle-chat-btn" class="bg-violet-bg hover:bg-violet/10 text-violet font-medium py-3 rounded-xl transition text-sm">
+          Test Chat
+        </button>
+        <a href="" id="support-link" class="bg-dark hover:bg-dark-subtle text-white font-medium py-3 rounded-xl transition text-sm text-center">
+          Support
+        </a>
+      </div>
+
+      <!-- Test Chat Widget (hidden by default) -->
+      <div id="chat-widget" class="hidden mb-4 fade-in">
+        <div class="border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-dark px-5 py-4 flex items-center gap-3">
+            <div class="w-9 h-9 bg-violet rounded-full flex items-center justify-center">
+              <span class="text-white font-bold text-sm">S</span>
+            </div>
+            <div>
+              <p class="text-white text-sm font-semibold" id="chat-header-name">Sofia AI</p>
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 bg-success rounded-full"></span>
+                <span class="text-xs text-white/50">Online</span>
+              </div>
+            </div>
+          </div>
+          <div id="chat-messages" class="p-4 space-y-3 min-h-[250px] max-h-[350px] overflow-y-auto bg-gray-50"></div>
+          <div class="px-4 py-3 bg-white border-t border-gray-100 flex gap-2">
+            <input type="text" id="chat-input" placeholder="Ask Sofia something..."
+              class="flex-1 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-violet focus:border-violet outline-none transition"
+              onkeydown="if(event.key==='Enter') sendTestMessage()">
+            <button onclick="sendTestMessage()" class="bg-violet hover:bg-violet-dark text-white px-4 py-2.5 rounded-xl transition">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Details -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-4">
+        <h3 class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-4">Account Details</h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Email</p>
+            <p class="text-sm font-medium text-dark" id="dash-email">--</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Phone Number</p>
+            <p class="text-sm font-medium text-dark" id="dash-phone">Pending Setup</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Language</p>
+            <p class="text-sm font-medium text-dark" id="dash-language">--</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Phone Mode</p>
+            <p class="text-sm font-medium text-dark" id="dash-phone-mode">--</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Knowledge Version</p>
+            <p class="text-sm font-medium text-dark" id="dash-kb-version">--</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Member Since</p>
+            <p class="text-sm font-medium text-dark" id="dash-created">--</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plan & Billing -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-4">
+        <h3 class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-4">Plan & Billing</h3>
+        <div class="bg-violet-bg border border-violet/20 rounded-xl p-4 mb-4">
+          <div class="flex items-center justify-between mb-1">
+            <p class="text-sm font-bold text-dark"><span id="dash-plan" class="text-violet">Starter</span></p>
+            <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day trial</span>
+          </div>
+          <p class="text-xs text-gray-500">No payment required until <span id="dash-trial-end" class="font-medium text-dark"></span>.</p>
+        </div>
+        <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Payment After Trial</p>
+        <div class="space-y-2">
+          <a href="https://paypal.me/zelvi999" target="_blank" rel="noopener noreferrer"
+            class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 hover:border-violet transition group">
+            <div class="w-8 h-8 rounded-lg bg-[#0070BA]/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-[#0070BA]" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944 3.72a.77.77 0 01.757-.65h6.23c2.077 0 3.527.638 4.307 1.896.33.532.523 1.12.586 1.794.066.714-.013 1.563-.24 2.59l-.007.03v.025c-.589 3.108-2.545 4.685-5.816 4.685H9.323a.768.768 0 00-.758.65L7.076 21.337z"/></svg>
+            </div>
+            <p class="text-sm font-medium text-gray-700 group-hover:text-violet transition flex-1">PayPal</p>
+            <span class="text-xs text-gray-300 group-hover:text-violet transition">&rarr;</span>
+          </a>
+          <a href="mailto:elvizekaj@zedigital.tech?subject=Sofia%20Payment%20-%20Bank%20Transfer"
+            class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 hover:border-violet transition group">
+            <div class="w-8 h-8 rounded-lg bg-gray-200 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+            </div>
+            <p class="text-sm font-medium text-gray-700 group-hover:text-violet transition flex-1">Bank Transfer (SEPA)</p>
+            <span class="text-xs text-gray-300 group-hover:text-violet transition">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Knowledge Base -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-4">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Knowledge Base</h3>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-gray-400" id="dash-kb-stats"></span>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div id="dash-services-section" class="hidden mb-4">
+          <button onclick="toggleSection('services-list')" class="w-full flex items-center justify-between py-2 text-left">
+            <span class="text-sm font-semibold text-dark">Services (<span id="dash-services-count">0</span>)</span>
+            <svg class="w-4 h-4 text-gray-400 transition-transform" id="services-list-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="services-list" class="hidden space-y-2 mt-2">
+          </div>
+        </div>
+
+        <!-- FAQs -->
+        <div id="dash-faqs-section" class="hidden mb-4">
+          <button onclick="toggleSection('faqs-list')" class="w-full flex items-center justify-between py-2 text-left">
+            <span class="text-sm font-semibold text-dark">FAQs (<span id="dash-faqs-count">0</span>)</span>
+            <svg class="w-4 h-4 text-gray-400 transition-transform" id="faqs-list-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="faqs-list" class="hidden space-y-2 mt-2">
+          </div>
+        </div>
+
+        <!-- Business Hours -->
+        <div id="dash-hours-section" class="hidden mb-4">
+          <p class="text-sm font-semibold text-dark mb-2">Business Hours</p>
+          <div id="dash-hours" class="text-sm text-gray-500 space-y-1"></div>
+        </div>
+
+        <!-- Uploaded Files -->
+        <div id="dash-files-section" class="hidden">
+          <p class="text-sm font-semibold text-dark mb-2">Uploaded Files</p>
+          <div id="dash-files" class="space-y-1"></div>
+        </div>
+
+        <div id="dash-kb-empty" class="hidden text-center py-4">
+          <p class="text-sm text-gray-400">No knowledge base yet.</p>
+          <button onclick="showStep(2)" class="text-sm text-violet hover:underline mt-1">Upload documents</button>
+        </div>
+      </div>
+
+      <!-- Activity Timeline -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-4">
+        <h3 class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-4">Recent Activity</h3>
+        <div class="space-y-2" id="dash-events">
+          <p class="text-xs text-gray-400">Loading...</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="border-t border-gray-100 py-8 mt-16">
+    <div class="max-w-5xl mx-auto px-6 text-center text-sm text-gray-400">
+      &copy; 2026 Z.E Digital Tech. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://api.sofia.zedigital.tech/api';
+    let clientId = null;
+    let clientToken = null;
+
+    const PLANS = {
+      starter: { name: 'Starter', price: '79' },
+      professional: { name: 'Professional', price: '199' },
+      enterprise: { name: 'Enterprise', price: '499' }
+    };
+
+    function authHeaders(extra = {}) {
+      const h = { ...extra };
+      if (clientToken) h['Authorization'] = `Bearer ${clientToken}`;
+      return h;
+    }
+
+    function showView(view) {
+      document.getElementById('login-view').classList.toggle('hidden', view !== 'login');
+      document.getElementById('verifying-view').classList.toggle('hidden', view !== 'verifying');
+      document.getElementById('dashboard-view').classList.toggle('hidden', view !== 'dashboard');
+      document.getElementById('logout-btn').classList.toggle('hidden', view !== 'dashboard');
+    }
+
+    // --- Init ---
+    async function init() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      if (token) {
+        showView('verifying');
+        try {
+          const res = await fetch(`${API_BASE}/auth/verify-magic-link`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token })
+          });
+          const data = await res.json();
+
+          if (data.clientId && data.clientToken) {
+            clientId = data.clientId;
+            clientToken = data.clientToken;
+            sessionStorage.setItem('sofia_clientId', clientId);
+            sessionStorage.setItem('sofia_clientToken', clientToken);
+            history.replaceState(null, '', window.location.pathname);
+            await loadDashboard();
+            return;
+          }
+        } catch {}
+        showView('login');
+        document.getElementById('login-error').classList.remove('hidden');
+        document.getElementById('login-error-text').textContent = 'This link is invalid or has expired. Please request a new one.';
+        history.replaceState(null, '', window.location.pathname);
+        return;
+      }
+
+      const storedId = sessionStorage.getItem('sofia_clientId');
+      const storedToken = sessionStorage.getItem('sofia_clientToken');
+      if (storedId && storedToken) {
+        clientId = storedId;
+        clientToken = storedToken;
+        showView('verifying');
+        try {
+          await loadDashboard();
+          return;
+        } catch {
+          sessionStorage.clear();
+        }
+      }
+
+      showView('login');
+    }
+
+    // --- Login Form ---
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const btn = document.getElementById('login-btn');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('login-success').classList.add('hidden');
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/magic-link`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          document.getElementById('sent-email').textContent = email;
+          document.getElementById('login-success').classList.remove('hidden');
+          document.getElementById('login-form').classList.add('hidden');
+        } else {
+          document.getElementById('login-error').classList.remove('hidden');
+          document.getElementById('login-error-text').textContent = data.error || 'Something went wrong.';
+        }
+      } catch {
+        document.getElementById('login-error').classList.remove('hidden');
+        document.getElementById('login-error-text').textContent = 'Connection error. Please try again.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send Magic Link';
+    });
+
+    // --- Load Dashboard ---
+    async function loadDashboard() {
+      const res = await fetch(`${API_BASE}/onboard/${clientId}/status`, {
+        headers: authHeaders()
+      });
+
+      if (!res.ok) {
+        sessionStorage.clear();
+        showView('login');
+        return;
+      }
+
+      const data = await res.json();
+      renderDashboard(data);
+      showView('dashboard');
+    }
+
+    function toggleSection(id) {
+      const el = document.getElementById(id);
+      const chevron = document.getElementById(id + '-chevron');
+      el.classList.toggle('hidden');
+      if (chevron) chevron.style.transform = el.classList.contains('hidden') ? '' : 'rotate(180deg)';
+    }
+
+    function renderDashboard(data) {
+      const c = data.client;
+      const ks = data.knowledgeSummary;
+
+      // Header
+      document.getElementById('dash-biz-name').textContent = c.name || 'Your Business';
+      document.getElementById('dash-account-id').textContent = c.id ? c.id.substring(0, 8) : '';
+
+      // Status badge
+      const badge = document.getElementById('dash-status-badge');
+      if (c.status === 'active') {
+        badge.innerHTML = '<span class="w-2 h-2 bg-success rounded-full"></span><span class="text-xs text-success">Active</span>';
+      } else {
+        badge.innerHTML = '<span class="w-2 h-2 bg-amber-400 rounded-full"></span><span class="text-xs text-amber-400">' + (c.status || 'pending').replace(/_/g, ' ') + '</span>';
+      }
+
+      // Account details
+      document.getElementById('dash-email').textContent = c.email || '--';
+      document.getElementById('dash-phone').textContent = c.twilio_number || 'Pending Setup';
+      document.getElementById('dash-language').textContent = (c.language || 'en').toUpperCase();
+      document.getElementById('dash-phone-mode').textContent = c.phone_mode === 'byod' ? 'Forward Existing' : 'New Number';
+      document.getElementById('dash-kb-version').textContent = c.knowledge_version ? `v${c.knowledge_version}` : 'Not set';
+
+      // Dates
+      if (c.created_at) {
+        const created = new Date(c.created_at);
+        document.getElementById('dash-created').textContent = created.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const trialEnd = new Date(created);
+        trialEnd.setDate(trialEnd.getDate() + 14);
+        document.getElementById('dash-trial-end').textContent = trialEnd.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      }
+
+      // Plan
+      const plan = PLANS[c.plan] || PLANS.starter;
+      document.getElementById('dash-plan').textContent = `${plan.name} — \u20AC${plan.price}/mo`;
+
+      // Knowledge Base
+      if (ks) {
+        const totalItems = (ks.serviceCount || 0) + (ks.faqCount || 0);
+        document.getElementById('dash-kb-stats').textContent = `${totalItems} items`;
+
+        // Services
+        if (ks.services && ks.services.length > 0) {
+          document.getElementById('dash-services-section').classList.remove('hidden');
+          document.getElementById('dash-services-count').textContent = ks.services.length;
+          document.getElementById('services-list').innerHTML = ks.services.map(s => `
+            <div class="bg-gray-50 rounded-lg px-3 py-2">
+              <p class="text-sm font-medium text-dark">${escapeHtml(s.name)}</p>
+              ${s.description ? `<p class="text-xs text-gray-400 mt-0.5 line-clamp-2">${escapeHtml(s.description.substring(0, 150))}</p>` : ''}
+            </div>
+          `).join('');
+        }
+
+        // FAQs
+        if (ks.faqs && ks.faqs.length > 0) {
+          document.getElementById('dash-faqs-section').classList.remove('hidden');
+          document.getElementById('dash-faqs-count').textContent = ks.faqs.length;
+          document.getElementById('faqs-list').innerHTML = ks.faqs.map(f => `
+            <div class="bg-gray-50 rounded-lg px-3 py-2">
+              <p class="text-sm font-medium text-dark">${escapeHtml(f.question)}</p>
+              <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">${escapeHtml((f.answer || '').substring(0, 150))}</p>
+            </div>
+          `).join('');
+        }
+
+        // Hours
+        if (ks.hours && Object.keys(ks.hours).length > 0) {
+          document.getElementById('dash-hours-section').classList.remove('hidden');
+          document.getElementById('dash-hours').innerHTML = Object.entries(ks.hours).map(([day, time]) =>
+            `<div class="flex justify-between"><span class="text-gray-500">${escapeHtml(day)}</span><span class="font-medium text-dark">${escapeHtml(String(time))}</span></div>`
+          ).join('');
+        }
+
+        if (!ks.services?.length && !ks.faqs?.length) {
+          document.getElementById('dash-kb-empty').classList.remove('hidden');
+        }
+      } else {
+        document.getElementById('dash-kb-empty').classList.remove('hidden');
+      }
+
+      // Files
+      if (data.files && data.files.length > 0) {
+        document.getElementById('dash-files-section').classList.remove('hidden');
+        document.getElementById('dash-files').innerHTML = data.files.map(f => `
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-gray-600">${escapeHtml(f.original_name)}</span>
+            <span class="text-xs px-2 py-0.5 rounded-full ${f.processing_status === 'extracted' ? 'bg-green-50 text-emerald-500' : 'bg-gray-100 text-gray-400'}">${f.processing_status}</span>
+          </div>
+        `).join('');
+      }
+
+      // Events
+      const eventsEl = document.getElementById('dash-events');
+      if (data.events && data.events.length > 0) {
+        eventsEl.innerHTML = data.events.slice(0, 8).map(ev => `
+          <div class="flex items-center gap-3 text-sm">
+            <span class="w-2 h-2 bg-violet rounded-full flex-shrink-0"></span>
+            <span class="text-gray-600 flex-1">${ev.event_type.replace(/_/g, ' ')}</span>
+            <span class="text-gray-400 text-xs">${new Date(ev.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+          </div>
+        `).join('');
+      } else {
+        eventsEl.innerHTML = '<p class="text-xs text-gray-400">No events yet.</p>';
+      }
+
+      // Support link
+      document.getElementById('support-link').href = `mailto:elvizekaj@zedigital.tech?subject=Sofia%20Support%20-%20${clientId}`;
+
+      // Chat header
+      document.getElementById('chat-header-name').textContent = `Sofia — ${c.name || 'Your Business'}`;
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // --- Logout ---
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      sessionStorage.clear();
+      clientId = null;
+      clientToken = null;
+      document.getElementById('login-form').classList.remove('hidden');
+      document.getElementById('login-success').classList.add('hidden');
+      document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('login-email').value = '';
+      document.getElementById('chat-widget').classList.add('hidden');
+      showView('login');
+    });
+
+    // --- Edit Knowledge (redirect to onboard step 2) ---
+    function showStep() {
+      window.location.href = 'onboard.html?edit=1';
+    }
+
+    // --- Test Chat ---
+    let chatBusy = false;
+    let chatInitialized = false;
+
+    document.getElementById('toggle-chat-btn').addEventListener('click', () => {
+      const widget = document.getElementById('chat-widget');
+      widget.classList.toggle('hidden');
+      if (!chatInitialized && !widget.classList.contains('hidden')) {
+        chatInitialized = true;
+        const bizName = document.getElementById('dash-biz-name').textContent;
+        addChatBubble('sofia', `Hi! I'm Sofia from ${bizName}. Ask me anything to test my knowledge.`);
+      }
+    });
+
+    function addChatBubble(type, text) {
+      const chatMessages = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'}`;
+      div.innerHTML = `<div class="${type === 'user' ? 'chat-bubble-user' : 'chat-bubble-sofia'} px-4 py-3 max-w-[80%] text-sm whitespace-pre-line">${text}</div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTyping() {
+      const chatMessages = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.id = 'typing-indicator';
+      div.className = 'flex justify-start';
+      div.innerHTML = `<div class="chat-bubble-sofia px-4 py-3 flex gap-1.5 items-center">
+        <span class="typing-dot w-2 h-2 bg-violet/50 rounded-full"></span>
+        <span class="typing-dot w-2 h-2 bg-violet/50 rounded-full"></span>
+        <span class="typing-dot w-2 h-2 bg-violet/50 rounded-full"></span>
+      </div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function hideTyping() {
+      const el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    }
+
+    async function sendTestMessage() {
+      if (chatBusy) return;
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (!message) return;
+
+      input.value = '';
+      addChatBubble('user', message);
+      chatBusy = true;
+      showTyping();
+
+      try {
+        const res = await fetch(`${API_BASE}/onboard/${clientId}/test-chat`, {
+          method: 'POST',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        hideTyping();
+        addChatBubble('sofia', data.reply || data.error || 'No response');
+      } catch {
+        hideTyping();
+        addChatBubble('sofia', 'Connection error. Please try again.');
+      }
+      chatBusy = false;
+    }
+
+    // --- Start ---
+    init();
+  </script>
+</body>
+</html>

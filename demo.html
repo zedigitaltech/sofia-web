@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo — Sofia AI Voice Receptionist</title>
+  <meta name="description" content="Watch Sofia handle real business calls across industries. See the AI receptionist in action — from greeting to confirmed appointments.">
+  <meta name="theme-color" content="#8B5CF6">
+  <meta property="og:title" content="Demo — Sofia AI Voice Receptionist">
+  <meta property="og:description" content="Watch Sofia AI handle real business calls in real-time across multiple industries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zedigitaltech.github.io/sofia-web/demo.html">
+  <meta name="twitter:card" content="summary">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            violet: '#8B5CF6',
+            'violet-light': '#A78BFA',
+            'violet-dark': '#7C3AED',
+            'violet-bg': '#F5F3FF',
+            dark: '#0F0D1A',
+            'dark-subtle': '#1A1726',
+            success: '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- NAV -->
+  <nav class="nav-sticky">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+          <a href="https://zedigital.tech" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-gray-400 hover:text-gray-900 transition-colors">Z.E Digital Tech</a>
+          <span class="text-gray-200">|</span>
+          <a href="index.html" class="text-2xl font-bold text-violet">Sofia</a>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="features.html" class="nav-link text-sm font-medium text-gray-500 hover:text-gray-900">Features</a>
+          <a href="demo.html" class="nav-link text-sm font-medium text-gray-900 font-bold">Demo</a>
+          <a href="pricing.html" class="nav-link text-sm font-medium text-gray-500 hover:text-gray-900">Pricing</a>
+          <a href="faq.html" class="nav-link text-sm font-medium text-gray-500 hover:text-gray-900">FAQ</a>
+          <a href="https://github.com/zedigitaltech" target="_blank" rel="noopener noreferrer" class="nav-link text-sm font-medium text-gray-500 hover:text-gray-900">GitHub</a>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <a href="dashboard.html" class="text-sm font-medium text-gray-500 hover:text-violet transition-colors">Login</a>
+          <a href="pricing.html" class="btn-primary text-sm py-2.5 px-6">Get Sofia</a>
+        </div>
+        <button id="hamburger" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+          <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="pb-4 space-y-2">
+          <a href="features.html" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">Features</a>
+          <a href="demo.html" class="block py-2 text-sm font-medium text-gray-900">Demo</a>
+          <a href="pricing.html" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">Pricing</a>
+          <a href="faq.html" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">FAQ</a>
+          <a href="dashboard.html" class="block py-2 text-sm font-medium text-violet hover:text-violet-dark">Login</a>
+          <a href="https://github.com/zedigitaltech" target="_blank" rel="noopener noreferrer" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">GitHub</a>
+          <a href="pricing.html" class="block bg-violet text-white text-sm font-semibold px-6 py-2.5 rounded-lg text-center mt-2">Get Sofia</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">See Sofia in Action</h1>
+    <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Watch an animated walkthrough of how Sofia handles real business calls — from the first ring to a confirmed appointment.</p>
+    <div class="mt-6 flex flex-wrap justify-center gap-4">
+      <button id="replay-btn" onclick="replayDemo()" class="btn-outline">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Replay Demo
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- INDUSTRY TABS -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
+    <div class="flex justify-center">
+      <div class="inline-flex bg-gray-100 rounded-full p-1 gap-1">
+        <button onclick="switchDemo('law')" id="tab-law" class="demo-tab px-4 py-2 rounded-full text-sm font-medium transition-all bg-violet text-white">Law Firm</button>
+        <button onclick="switchDemo('medical')" id="tab-medical" class="demo-tab px-4 py-2 rounded-full text-sm font-medium transition-all text-gray-600 hover:text-gray-900">Medical</button>
+        <button onclick="switchDemo('restaurant')" id="tab-restaurant" class="demo-tab px-4 py-2 rounded-full text-sm font-medium transition-all text-gray-600 hover:text-gray-900">Restaurant</button>
+        <button onclick="switchDemo('hotel')" id="tab-hotel" class="demo-tab px-4 py-2 rounded-full text-sm font-medium transition-all text-gray-600 hover:text-gray-900">Hotel</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO WALKTHROUGH -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
+      <!-- Phone mockup -->
+      <div class="flex justify-center sticky top-24">
+        <div class="phone-frame w-full max-w-[340px]">
+          <div class="bg-gray-900 pt-2 pb-3 px-5 relative">
+            <div class="phone-notch"></div>
+            <div class="flex items-center justify-between mt-3 text-white/80">
+              <span class="text-xs font-medium" id="demo-call-status">Incoming Call...</span>
+              <span class="text-xs font-medium" id="demo-timer">00:00</span>
+            </div>
+            <div class="text-center mt-1">
+              <p class="text-white font-semibold text-sm" id="demo-business-name">Anderson & Associates</p>
+              <p class="text-white/50 text-xs" id="demo-business-phone">+1 (555) 234-5678</p>
+            </div>
+          </div>
+          <div id="demo-phone-body" class="bg-white p-4 space-y-3 min-h-[380px] transition-all">
+            <!-- Messages injected by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Step narration -->
+      <div class="space-y-6" id="demo-steps">
+        <!-- Steps injected by JS based on selected industry -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFETTI CONTAINER -->
+  <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50"></div>
+
+  <!-- CTA -->
+  <section class="bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to Stop Losing Clients?</h2>
+      <p class="mt-4 text-white/60 max-w-xl mx-auto">Start your free trial today and let Sofia handle your business calls 24/7.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="pricing.html" class="btn-primary">Start Free Trial</a>
+        <a href="features.html" class="inline-block border-2 border-white/30 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors text-sm">View Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-4 gap-10">
+        <div>
+          <a href="index.html" class="text-2xl font-bold text-violet">Sofia</a>
+          <p class="mt-3 text-sm text-white/40 leading-relaxed">AI-Powered Voice Receptionist for Every Business. A product by Z.E Digital Tech.</p>
+          <img src="ze-logo.png" alt="Z.E Digital Tech" class="h-6 w-auto opacity-40 mt-2">
+          <a href="https://zedigital.tech" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs text-white/30 hover:text-white transition-colors">zedigital.tech</a>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">Product</h4>
+          <div class="space-y-2">
+            <a href="features.html" class="block text-sm text-white/40 hover:text-white transition-colors">Features</a>
+            <a href="pricing.html" class="block text-sm text-white/40 hover:text-white transition-colors">Pricing</a>
+            <a href="demo.html" class="block text-sm text-white/40 hover:text-white transition-colors">Demo</a>
+            <a href="faq.html" class="block text-sm text-white/40 hover:text-white transition-colors">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">Legal</h4>
+          <div class="space-y-2">
+            <a href="terms.html" class="block text-sm text-white/40 hover:text-white transition-colors">Terms of Service</a>
+            <a href="privacy.html" class="block text-sm text-white/40 hover:text-white transition-colors">Privacy Policy</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">Contact</h4>
+          <div class="space-y-2">
+            <a href="mailto:elvizekaj@zedigital.tech" class="block text-sm text-white/40 hover:text-white transition-colors">elvizekaj@zedigital.tech</a>
+            <a href="https://github.com/zedigitaltech" target="_blank" rel="noopener noreferrer" class="block text-sm text-white/40 hover:text-white transition-colors">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- More from ZeDigital -->
+      <div class="mt-12 pt-8 border-t border-white/5">
+        <h4 class="text-xs font-semibold text-white/30 uppercase tracking-widest mb-4">More from Z.E Digital Tech</h4>
+        <div class="footer-products-grid">
+          <a href="https://zedigitaltech.github.io/sofia-web/" class="footer-product-link">Sofia AI</a>
+          <a href="https://ezekaj.github.io/forex_2026/" class="footer-product-link">Trading Bot</a>
+          <a href="https://ezekaj.github.io/elo-agi/" class="footer-product-link">ELO-AGI</a>
+          <a href="https://ezekaj.github.io/agielo/" class="footer-product-link">Human Cognition</a>
+          <a href="https://ezekaj.github.io/prp-ai-assistant/" class="footer-product-link">PRP-AI</a>
+          <a href="https://ezekaj.github.io/multi-agent-system/" class="footer-product-link">Multi-Agent</a>
+          <a href="https://ezekaj.github.io/humanvad/" class="footer-product-link">HumanVAD</a>
+          <a href="https://ezekaj.github.io/neuro-vscode/" class="footer-product-link">NEURO VS Code</a>
+          <a href="https://ezekaj.github.io/autonomus_elo2.0/" class="footer-product-link">ByteBot</a>
+          <a href="https://ezekaj.github.io/NOVA/" class="footer-product-link">NOVA Wallet</a>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/20"><span class="current-year">2026</span> Z.E Digital Tech. All rights reserved.</p>
+        <p class="text-xs text-white/20">Built with precision in Austria.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    const demoScenarios = {
+      law: {
+        name: 'Anderson & Associates',
+        phone: '+1 (555) 234-5678',
+        confirmLabel: 'Consultation Booked!',
+        messages: [
+          { delay: 1500, type: 'system', text: 'Call connected' },
+          { delay: 2500, type: 'sofia', text: 'Good evening, Anderson & Associates. This is Sofia, how may I help you?' },
+          { delay: 5000, type: 'caller', text: 'Hi, I need to speak with someone about reviewing a business contract. Is anyone available?' },
+          { delay: 8000, type: 'sofia', text: 'Of course! I can help schedule a consultation with one of our attorneys. Could you tell me a bit more about the contract type?' },
+          { delay: 11000, type: 'caller', text: 'It\'s a partnership agreement for a new venture. We need it reviewed before signing next week.' },
+          { delay: 13500, type: 'sofia', text: 'Perfect. For partnership agreements, I\'d recommend a session with our business law team. We have availability:\n\nThursday 10:00 AM\nFriday 2:00 PM\n\nEach consultation is 45 minutes. Shall I book one?' },
+          { delay: 17000, type: 'caller', text: 'Thursday at 10 works great.' },
+          { delay: 19500, type: 'sofia', text: 'Wonderful! I just need your name and a contact number for the appointment.' },
+          { delay: 22000, type: 'caller', text: 'James Mitchell, 555-890-1234.' },
+          { delay: 24000, type: 'sofia', text: 'All set, Mr. Mitchell! Your consultation is confirmed:\n\nRef: #AA-2026-0312\nBusiness Law — Contract Review\nThursday 10:00 AM, 45 min\n\nYou\'ll receive a confirmation email shortly with preparation details. See you Thursday!' },
+          { delay: 28000, type: 'confetti', text: 'Consultation Booked!' },
+          { delay: 30000, type: 'dashboard', text: '', data: { label: 'Client', name: 'James Mitchell', detail1Label: 'Date', detail1: 'Thursday 10:00 AM', detail2Label: 'Type', detail2: 'Contract Review', statusLabel: 'Status', status: 'Confirmed' } }
+        ],
+        steps: [
+          { title: 'Phone Rings', text: 'A potential client calls the firm\'s main number at 8:47 PM — well after office hours. Traditionally, this call goes to voicemail. With Sofia, it\'s answered instantly.' },
+          { title: 'Sofia Answers', text: 'Within 280ms of the call connecting, Sofia greets the caller professionally. The voice is natural and warm, indistinguishable from a human receptionist.' },
+          { title: 'Caller Describes Their Need', text: 'The caller explains they need a contract review. Sofia understands the legal context and knows which practice area to route them to.' },
+          { title: 'Sofia Checks Availability', text: 'Sofia queries the firm\'s calendar in real-time. She knows attorney schedules, practice areas, and appointment types. The response is generated within 300ms.' },
+          { title: 'Appointment Options', text: 'Sofia presents available time slots with session details. She matches the caller\'s needs to the right attorney team — business law for partnership agreements.' },
+          { title: 'Caller Wants to Book', text: 'The caller picks a time. Sofia captures all necessary details: name, contact number, and case type. The lead is qualified and logged.' },
+          { title: 'Consultation Confirmed', text: 'Sofia confirms the appointment, provides a reference number, and sends a confirmation email. The entire call took 1 minute and 52 seconds. A client that would have been lost to voicemail is now booked.' },
+          { title: 'Dashboard Updated', text: 'The new appointment appears instantly on the firm\'s dashboard. Staff see the full transcript, client details, and case notes when they arrive in the morning.' }
+        ]
+      },
+      medical: {
+        name: 'Westside Family Medicine',
+        phone: '+1 (555) 789-0123',
+        confirmLabel: 'Appointment Booked!',
+        messages: [
+          { delay: 1500, type: 'system', text: 'Call connected' },
+          { delay: 2500, type: 'sofia', text: 'Good morning, Westside Family Medicine. This is Sofia, how can I assist you today?' },
+          { delay: 5000, type: 'caller', text: 'Hi, I\'d like to schedule a checkup. I haven\'t been in for about a year.' },
+          { delay: 8000, type: 'sofia', text: 'Of course! An annual wellness exam is a great idea. Are you an existing patient with us?' },
+          { delay: 11000, type: 'caller', text: 'Yes, I\'ve been coming for about three years. My name is Sarah Chen.' },
+          { delay: 13500, type: 'sofia', text: 'Great to hear from you, Sarah! I have availability for a wellness exam:\n\nMonday 9:30 AM — Dr. Patel\nWednesday 2:00 PM — Dr. Nguyen\n\nBoth appointments are 30 minutes. Which works better?' },
+          { delay: 17000, type: 'caller', text: 'Wednesday afternoon please.' },
+          { delay: 19500, type: 'sofia', text: 'Perfect choice! Let me confirm your details — is your phone number still ending in 4567?' },
+          { delay: 22000, type: 'caller', text: 'Yes, that\'s correct.' },
+          { delay: 24000, type: 'sofia', text: 'You\'re all set, Sarah! Appointment confirmed:\n\nRef: #WFM-2026-1204\nWellness Exam — Dr. Nguyen\nWednesday 2:00 PM, 30 min\n\nPlease arrive 10 minutes early. We\'ll send a reminder the day before. Take care!' },
+          { delay: 28000, type: 'confetti', text: 'Appointment Booked!' },
+          { delay: 30000, type: 'dashboard', text: '', data: { label: 'Patient', name: 'Sarah Chen', detail1Label: 'Date', detail1: 'Wednesday 2:00 PM', detail2Label: 'Type', detail2: 'Wellness Exam', statusLabel: 'Status', status: 'Confirmed' } }
+        ],
+        steps: [
+          { title: 'Phone Rings', text: 'A patient calls during the lunch break when the front desk is away. Instead of reaching a busy signal or voicemail, Sofia answers on the first ring.' },
+          { title: 'Sofia Answers', text: 'Sofia greets the caller warmly and professionally, just like a trained medical receptionist. No hold music, no menu trees.' },
+          { title: 'Patient Describes Their Need', text: 'The patient wants an annual checkup. Sofia recognizes the appointment type and asks the right follow-up questions.' },
+          { title: 'Sofia Checks Availability', text: 'Sofia queries the practice\'s scheduling system in real-time. She knows each doctor\'s availability and specialties.' },
+          { title: 'Appointment Options', text: 'Sofia presents available slots with the right doctors. She matches the wellness exam to physicians who handle routine checkups.' },
+          { title: 'Patient Confirms', text: 'The patient picks a time. Sofia verifies their existing records to streamline the booking process.' },
+          { title: 'Appointment Confirmed', text: 'Sofia confirms everything with a reference number and sends a reminder. A patient that almost went to voicemail is now booked for Wednesday.' },
+          { title: 'Dashboard Updated', text: 'The appointment appears in the practice management system instantly. The doctor\'s schedule is updated and front desk staff see it when they return.' }
+        ]
+      },
+      restaurant: {
+        name: 'Bella Vita Ristorante',
+        phone: '+1 (555) 456-7890',
+        confirmLabel: 'Reservation Confirmed!',
+        messages: [
+          { delay: 1500, type: 'system', text: 'Call connected' },
+          { delay: 2500, type: 'sofia', text: 'Buonasera! Bella Vita Ristorante, this is Sofia. How may I help you this evening?' },
+          { delay: 5000, type: 'caller', text: 'Hi! I\'d like to make a reservation for this Saturday evening, please.' },
+          { delay: 8000, type: 'sofia', text: 'Wonderful! Saturday evening is a lovely choice. How many guests will be joining?' },
+          { delay: 11000, type: 'caller', text: 'There will be four of us. Around 7:30 if possible.' },
+          { delay: 13500, type: 'sofia', text: 'Let me check for you! I have availability for 4 guests:\n\n7:00 PM — Window table\n7:30 PM — Garden terrace\n8:00 PM — Main dining room\n\nThe garden terrace is beautiful on Saturday evenings. Shall I reserve it?' },
+          { delay: 17000, type: 'caller', text: 'The garden terrace sounds perfect!' },
+          { delay: 19500, type: 'sofia', text: 'Excellent choice! May I have a name for the reservation, and any dietary preferences I should note?' },
+          { delay: 22000, type: 'caller', text: 'Lisa Park. One guest is vegetarian.' },
+          { delay: 24000, type: 'sofia', text: 'Perfetto! Your reservation is confirmed:\n\nRef: #BV-2026-0189\nSaturday 7:30 PM — Garden Terrace\nParty of 4, vegetarian noted\n\nI\'ll text you a confirmation. We look forward to welcoming you, Ms. Park!' },
+          { delay: 28000, type: 'confetti', text: 'Reservation Confirmed!' },
+          { delay: 30000, type: 'dashboard', text: '', data: { label: 'Guest', name: 'Lisa Park', detail1Label: 'Date', detail1: 'Saturday 7:30 PM', detail2Label: 'Table', detail2: 'Garden Terrace (4)', statusLabel: 'Status', status: 'Confirmed' } }
+        ],
+        steps: [
+          { title: 'Phone Rings', text: 'A caller dials during the dinner rush when the host is seating guests. With Sofia, no call goes unanswered — even on the busiest nights.' },
+          { title: 'Sofia Answers', text: 'Sofia greets the caller with warmth and personality that matches the restaurant\'s brand. Natural, friendly, and on-brand.' },
+          { title: 'Caller Wants a Reservation', text: 'The caller wants a Saturday dinner table. Sofia understands party size, timing preferences, and seating requests.' },
+          { title: 'Sofia Checks Availability', text: 'Sofia queries the reservation system in real-time. She knows table layouts, capacity, and which spots are most popular.' },
+          { title: 'Table Options', text: 'Sofia presents available seating with descriptions that help the caller choose. She highlights the garden terrace — a genuine recommendation based on the evening.' },
+          { title: 'Caller Confirms', text: 'The caller picks the terrace. Sofia captures the name and any dietary notes to pass along to the kitchen.' },
+          { title: 'Reservation Confirmed', text: 'Sofia confirms with a reference number and sends a text confirmation. A table that might have gone empty is now booked — revenue saved in 90 seconds.' },
+          { title: 'Dashboard Updated', text: 'The reservation appears on the host stand immediately. Kitchen staff see the dietary note. The evening service runs smoothly.' }
+        ]
+      },
+      hotel: {
+        name: 'Hotel L\u00e4rchenhof',
+        phone: '+43 5517 2847',
+        confirmLabel: 'Booking Confirmed!',
+        messages: [
+          { delay: 1500, type: 'system', text: 'Call connected' },
+          { delay: 2500, type: 'sofia', text: 'Guten Abend! Hotel L\u00e4rchenhof, mein Name ist Sofia. Wie kann ich Ihnen behilflich sein?' },
+          { delay: 5000, type: 'caller', text: 'Guten Abend! Ich m\u00f6chte gerne wissen, ob Sie noch Zimmer frei haben f\u00fcr dieses Wochenende.' },
+          { delay: 8000, type: 'sofia', text: 'Nat\u00fcrlich! F\u00fcr dieses Wochenende haben wir noch Verf\u00fcgbarkeiten. F\u00fcr wie viele G\u00e4ste suchen Sie ein Zimmer?' },
+          { delay: 11000, type: 'caller', text: 'F\u00fcr zwei Personen, bitte. Am liebsten mit Bergblick.' },
+          { delay: 13500, type: 'sofia', text: 'Wunderbar! Ich habe ein sch\u00f6nes Doppelzimmer mit Bergblick f\u00fcr Sie:\n\nAlpenzimmer: \u20ac129/Nacht\nInkl. Fr\u00fchst\u00fcck und Spa-Zugang\n\nSoll ich das f\u00fcr Sie reservieren?' },
+          { delay: 17000, type: 'caller', text: 'Ja, bitte! Das klingt perfekt. Samstag bis Montag.' },
+          { delay: 19500, type: 'sofia', text: 'Sehr gerne! Ich brauche nur noch Ihren Namen f\u00fcr die Reservierung.' },
+          { delay: 22000, type: 'caller', text: 'Markus Weber.' },
+          { delay: 24000, type: 'sofia', text: 'Vielen Dank, Herr Weber! Ihre Reservierung ist best\u00e4tigt:\n\nRef: #LH-2026-0847\nAlpenzimmer mit Bergblick\nSa\u2013Mo, 2 G\u00e4ste\nGesamt: \u20ac258\n\nIch sende Ihnen eine Best\u00e4tigung per E-Mail. Wir freuen uns auf Sie!' },
+          { delay: 28000, type: 'confetti', text: 'Booking Confirmed!' },
+          { delay: 30000, type: 'dashboard', text: '', data: { label: 'Guest', name: 'Markus Weber', detail1Label: 'Dates', detail1: 'Sat \u2013 Mon', detail2Label: 'Room', detail2: 'Alpenzimmer', statusLabel: 'Status', status: 'Confirmed' } }
+        ],
+        steps: [
+          { title: 'Phone Rings', text: 'A potential guest calls the hotel\'s main number at 11:42 PM \u2014 well past reception hours. With Sofia, the call is answered instantly.' },
+          { title: 'Sofia Answers', text: 'Within 280ms, Sofia greets the caller in warm, natural German. The voice is indistinguishable from a real person, complete with natural pauses and intonation.' },
+          { title: 'Caller Asks About Rooms', text: 'The caller asks about weekend availability. Sofia understands instantly \u2014 including Austrian German dialect and colloquial expressions.' },
+          { title: 'Sofia Checks Availability', text: 'Sofia queries the hotel\'s knowledge base in real-time. She knows room types, pricing, and current availability. Response generated within 300ms.' },
+          { title: 'Room Details & Pricing', text: 'Sofia presents the best matching room with pricing and amenities. She personalizes the recommendation based on the caller\'s preferences \u2014 a double room with mountain view.' },
+          { title: 'Caller Wants to Book', text: 'The caller decides to book. Sofia captures all details: name, dates, number of guests. The booking intent is qualified and logged.' },
+          { title: 'Booking Confirmed', text: 'Sofia confirms the reservation with a reference number and sends a confirmation email. A booking that would have been lost to voicemail is now secured.' },
+          { title: 'Dashboard Updated', text: 'The booking appears instantly on the hotel\'s dashboard. Staff see the full transcript, guest details, and preferences when they arrive in the morning.' }
+        ]
+      }
+    };
+
+    let currentScenario = 'law';
+    let demoTimeout = null;
+    let demoTimerInterval = null;
+    let demoSeconds = 0;
+
+    function switchDemo(industry) {
+      currentScenario = industry;
+
+      // Update tab styles
+      document.querySelectorAll('.demo-tab').forEach(tab => {
+        tab.classList.remove('bg-violet', 'text-white');
+        tab.classList.add('text-gray-600');
+      });
+      document.getElementById('tab-' + industry).classList.add('bg-violet', 'text-white');
+      document.getElementById('tab-' + industry).classList.remove('text-gray-600');
+
+      // Update phone header
+      const scenario = demoScenarios[industry];
+      document.getElementById('demo-business-name').textContent = scenario.name;
+      document.getElementById('demo-business-phone').textContent = scenario.phone;
+
+      // Render steps
+      renderSteps(scenario.steps);
+
+      // Restart demo
+      replayDemo();
+    }
+
+    function renderSteps(steps) {
+      const container = document.getElementById('demo-steps');
+      container.innerHTML = '';
+      steps.forEach((step, i) => {
+        const isLast = i === steps.length - 1;
+        const bgClass = i === 6 ? 'bg-emerald-500' : (isLast ? 'bg-gray-900' : 'bg-violet');
+        const div = document.createElement('div');
+        div.className = 'demo-step bg-white rounded-2xl border border-gray-100 shadow-sm p-6';
+        div.setAttribute('data-step', i + 1);
+        div.innerHTML = '<div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full ' + bgClass + ' text-white flex items-center justify-center font-bold text-sm">' + (i + 1) + '</div><h3 class="font-bold text-gray-900 text-lg">' + step.title + '</h3></div><p class="text-sm text-gray-500 leading-relaxed">' + step.text + '</p>';
+        container.appendChild(div);
+      });
+    }
+
+    function startDemo() {
+      const phoneBody = document.getElementById('demo-phone-body');
+      const timerEl = document.getElementById('demo-timer');
+      const statusEl = document.getElementById('demo-call-status');
+      const steps = document.querySelectorAll('.demo-step');
+      const scenario = demoScenarios[currentScenario];
+
+      phoneBody.innerHTML = '';
+      demoSeconds = 0;
+      timerEl.textContent = '00:00';
+      statusEl.textContent = 'Incoming Call...';
+
+      steps.forEach(s => {
+        s.classList.remove('active', 'completed');
+      });
+
+      statusEl.innerHTML = '<span class="animate-pulse">Ringing...</span>';
+
+      setTimeout(() => {
+        statusEl.textContent = 'Active Call';
+        demoTimerInterval = setInterval(() => {
+          demoSeconds++;
+          const m = Math.floor(demoSeconds / 60).toString().padStart(2, '0');
+          const s = (demoSeconds % 60).toString().padStart(2, '0');
+          timerEl.textContent = m + ':' + s;
+        }, 1000);
+      }, 1500);
+
+      scenario.messages.forEach((msg, idx) => {
+        setTimeout(() => {
+          if (msg.type === 'system') {
+            activateStep(0);
+          } else if (msg.type === 'confetti') {
+            activateStep(6);
+            showConfetti();
+            const confirmDiv = document.createElement('div');
+            confirmDiv.className = 'text-center py-4 animate-fade-in-up';
+            confirmDiv.innerHTML = '<div class="inline-block bg-emerald-500 text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-lg">' + scenario.confirmLabel + '</div>';
+            phoneBody.appendChild(confirmDiv);
+          } else if (msg.type === 'dashboard') {
+            activateStep(7);
+            clearInterval(demoTimerInterval);
+            statusEl.textContent = 'Call Ended';
+            const d = msg.data;
+            const dashDiv = document.createElement('div');
+            dashDiv.className = 'bg-gray-50 rounded-xl p-3 mt-2 animate-fade-in-up';
+            dashDiv.innerHTML = '<p class="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Dashboard Update</p><div class="flex justify-between text-[11px] text-gray-500 mb-1"><span>' + d.label + '</span><span class="font-medium">' + d.name + '</span></div><div class="flex justify-between text-[11px] text-gray-500 mb-1"><span>' + d.detail1Label + '</span><span class="font-medium">' + d.detail1 + '</span></div><div class="flex justify-between text-[11px] text-gray-500 mb-1"><span>' + d.detail2Label + '</span><span class="font-medium">' + d.detail2 + '</span></div><div class="flex justify-between text-[11px] text-emerald-500 font-semibold"><span>' + d.statusLabel + '</span><span>' + d.status + '</span></div>';
+            phoneBody.appendChild(dashDiv);
+          } else {
+            const stepMap = [0, 0, 1, 2, 3, 4, 5, 5, 5, 6, 7];
+            if (stepMap[idx] !== undefined) activateStep(stepMap[idx]);
+            addDemoMessage(msg.type, msg.text);
+          }
+          phoneBody.scrollTop = phoneBody.scrollHeight;
+        }, msg.delay);
+      });
+
+      demoTimeout = setTimeout(() => {
+        replayDemo();
+      }, 38000);
+    }
+
+    function activateStep(idx) {
+      const steps = document.querySelectorAll('.demo-step');
+      steps.forEach((s, i) => {
+        if (i < idx) {
+          s.classList.remove('active');
+          s.classList.add('completed');
+        } else if (i === idx) {
+          s.classList.add('active');
+          s.classList.remove('completed');
+          s.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          s.classList.remove('active', 'completed');
+        }
+      });
+    }
+
+    function addDemoMessage(type, text) {
+      const phoneBody = document.getElementById('demo-phone-body');
+      const div = document.createElement('div');
+      div.className = 'animate-fade-in-up';
+
+      const formatted = text.replace(/\n/g, '<br>');
+
+      if (type === 'sofia') {
+        div.innerHTML = '<div class="msg-sofia px-4 py-2.5"><p class="text-[10px] text-white/70 font-medium mb-0.5">Sofia</p><p class="text-xs text-white leading-snug">' + formatted + '</p></div>';
+      } else {
+        div.innerHTML = '<div class="msg-guest px-4 py-2.5"><p class="text-[10px] text-gray-400 font-medium mb-0.5">Caller</p><p class="text-xs text-gray-900 leading-snug">' + formatted + '</p></div>';
+      }
+
+      phoneBody.appendChild(div);
+    }
+
+    function showConfetti() {
+      const container = document.getElementById('confetti-container');
+      container.innerHTML = '';
+      const colors = ['#8B5CF6', '#A78BFA', '#7C3AED', '#10B981', '#6366F1'];
+      for (let i = 0; i < 50; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+        container.appendChild(piece);
+      }
+      setTimeout(() => { container.innerHTML = ''; }, 5000);
+    }
+
+    function replayDemo() {
+      if (demoTimeout) clearTimeout(demoTimeout);
+      if (demoTimerInterval) clearInterval(demoTimerInterval);
+      startDemo();
+    }
+
+    // Auto-start on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSteps(demoScenarios[currentScenario].steps);
+      setTimeout(startDemo, 500);
+    });
+  </script>
+</body>
+</html>

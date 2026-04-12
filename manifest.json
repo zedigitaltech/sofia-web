@@ -1,0 +1,16 @@
+{
+  "name": "Sofia AI - Voice Receptionist",
+  "short_name": "Sofia AI",
+  "description": "24/7 AI voice receptionist for businesses",
+  "start_url": "/sofia-web/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B5CF6",
+  "icons": [
+    {
+      "src": "ze-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — Sofia AI</title>
+  <meta name="description" content="Sofia AI pricing. Starting at &euro;79/month. Simple, transparent plans for every business size. 14-day free trial.">
+  <meta name="theme-color" content="#8B5CF6">
+  <meta property="og:title" content="Pricing — Sofia AI">
+  <meta property="og:description" content="AI receptionist starting at &euro;79/month. 14-day free trial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zedigitaltech.github.io/sofia-web/pricing.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pricing — Sofia AI">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        violet: '#8B5CF6',
+        'violet-light': '#A78BFA',
+        'violet-dark': '#7C3AED',
+        'violet-bg': '#F5F3FF',
+        dark: '#0F0D1A',
+        'dark-subtle': '#1A1726',
+        success: '#10B981',
+      }
+    }
+  }
+}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- NAV -->
+  <nav class="nav-sticky">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+          <a href="https://zedigital.tech" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-gray-400 hover:text-gray-900 transition-colors">Z.E Digital Tech</a>
+          <span class="text-gray-200">|</span>
+          <a href="index.html" class="text-2xl font-bold text-violet">Sofia</a>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="features.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Features</a>
+          <a href="demo.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Demo</a>
+          <a href="pricing.html" class="text-sm font-medium text-gray-900 transition-colors font-bold">Pricing</a>
+          <a href="faq.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">FAQ</a>
+          <a href="https://github.com/zedigitaltech" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">GitHub</a>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <a href="dashboard.html" class="text-sm font-medium text-gray-500 hover:text-violet transition-colors">Login</a>
+          <a href="pricing.html" class="btn-primary text-sm py-2.5 px-6">Get Sofia</a>
+        </div>
+        <button id="hamburger" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+          <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="pb-4 space-y-2">
+          <a href="features.html" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">Features</a>
+          <a href="demo.html" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">Demo</a>
+          <a href="pricing.html" class="block py-2 text-sm font-medium text-gray-900">Pricing</a>
+          <a href="faq.html" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">FAQ</a>
+          <a href="dashboard.html" class="block py-2 text-sm font-medium text-violet hover:text-violet-dark">Login</a>
+          <a href="https://github.com/zedigitaltech" target="_blank" rel="noopener noreferrer" class="block py-2 text-sm font-medium text-gray-500 hover:text-gray-900">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">Simple, Transparent Pricing</h1>
+    <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Choose the plan that fits your business. No hidden fees. Cancel anytime. 14-day free trial.</p>
+
+    <!-- Toggle -->
+    <div class="mt-8 flex justify-center">
+      <div class="pricing-toggle">
+        <button id="toggle-monthly" class="pricing-toggle-btn active">Monthly</button>
+        <button id="toggle-annual" class="pricing-toggle-btn">Annual <span class="text-emerald-500 text-xs font-bold ml-1">-20%</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CARDS -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
+      <!-- Starter -->
+      <div class="pricing-card reveal">
+        <div class="inline-block bg-green-50 text-emerald-500 text-xs font-bold px-3 py-1 rounded-full mb-3">14-day free trial</div>
+        <h3 class="text-xl font-bold text-gray-900">Starter</h3>
+        <p class="text-sm text-gray-400 mt-1">Perfect for small businesses</p>
+        <div class="mt-4 flex items-baseline gap-1">
+          <span class="text-5xl font-extrabold text-gray-900" data-price-tier="starter">&euro;79</span>
+          <span class="text-gray-400 text-sm">/mo</span>
+        </div>
+        <p class="text-xs text-emerald-500 mt-1" data-annual-note style="display:none;">Billed annually at &euro;756/year</p>
+        <ul class="mt-8 space-y-3">
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            1 business location
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            2 languages
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            500 calls/month
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Email support (48h response)
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Basic voice customization
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            24/7 availability
+          </li>
+        </ul>
+        <a href="onboard.html?plan=starter" class="mt-8 block w-full text-center border-2 border-gray-900 text-gray-900 font-semibold py-3.5 rounded-xl hover:bg-gray-900 hover:text-white transition-colors text-sm">Get Started</a>
+      </div>
+
+      <!-- Professional -->
+      <div class="pricing-card popular reveal reveal-delay-1">
+        <div class="pricing-badge">MOST POPULAR</div>
+        <div class="inline-block bg-green-50 text-emerald-500 text-xs font-bold px-3 py-1 rounded-full mb-3 mt-2">14-day free trial</div>
+        <h3 class="text-xl font-bold text-gray-900">Professional</h3>
+        <p class="text-sm text-gray-400 mt-1">For growing businesses</p>
+        <div class="mt-4 flex items-baseline gap-1">
+          <span class="text-5xl font-extrabold text-violet" data-price-tier="professional">&euro;199</span>
+          <span class="text-gray-400 text-sm">/mo</span>
+        </div>
+        <p class="text-xs text-emerald-500 mt-1" data-annual-note style="display:none;">Billed annually at &euro;1,908/year</p>
+        <ul class="mt-8 space-y-3">
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Up to 3 locations
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            All languages (DE/EN/IT/FR)
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            2,000 calls/month
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Priority support (4h response)
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Full voice customization
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Analytics dashboard
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Lead integration
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Call recording
+          </li>
+        </ul>
+        <a href="onboard.html?plan=professional" class="mt-8 block w-full text-center bg-violet hover:bg-violet-dark text-white font-semibold py-3.5 rounded-xl transition-colors shadow-md shadow-violet/20 text-sm">Get Professional</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="inline-block bg-green-50 text-emerald-500 text-xs font-bold px-3 py-1 rounded-full mb-3">14-day free trial</div>
+        <h3 class="text-xl font-bold text-gray-900">Enterprise</h3>
+        <p class="text-sm text-gray-400 mt-1">For multi-location businesses</p>
+        <div class="mt-4 flex items-baseline gap-1">
+          <span class="text-5xl font-extrabold text-gray-900" data-price-tier="enterprise">&euro;499</span>
+          <span class="text-gray-400 text-sm">/mo</span>
+        </div>
+        <p class="text-xs text-emerald-500 mt-1" data-annual-note style="display:none;">Billed annually at &euro;4,788/year</p>
+        <ul class="mt-8 space-y-3">
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Unlimited locations
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            All languages + custom
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Unlimited calls
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Dedicated account manager (1h response)
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            API access
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Custom integrations (CRM, ERP, scheduling)
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            SLA guarantee 99.9%
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            White-label option
+          </li>
+          <li class="flex items-start gap-3 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-violet flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            On-premise deployment
+          </li>
+        </ul>
+        <a href="mailto:elvizekaj@zedigital.tech?subject=Sofia%20Enterprise%20Plan" class="mt-8 block w-full text-center border-2 border-gray-900 text-gray-900 font-semibold py-3.5 rounded-xl hover:bg-gray-900 hover:text-white transition-colors text-sm">Contact Sales</a>
+      </div>
+    </div>
+
+    <!-- Guarantee badges -->
+    <div class="flex flex-wrap justify-center gap-6 mt-12 reveal">
+      <div class="flex items-center gap-2 bg-green-50 rounded-full px-4 py-2">
+        <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span class="text-sm font-semibold text-emerald-500">14-day free trial</span>
+      </div>
+      <div class="flex items-center gap-2 bg-blue-50 rounded-full px-4 py-2">
+        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-sm font-semibold text-blue-600">Cancel anytime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI CALLOUT -->
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <div class="bg-gray-900 rounded-2xl p-8 text-center reveal">
+      <p class="text-white/60 text-sm uppercase tracking-wide font-semibold mb-2">Why Sofia?</p>
+      <p class="text-2xl sm:text-3xl font-bold text-white">A full-time receptionist costs &euro;2,500+/month.</p>
+      <p class="text-2xl sm:text-3xl font-bold text-violet mt-2">Sofia starts at &euro;79/month — that's a 97% cost reduction.</p>
+    </div>
+  </section>
+
+  <!-- PAYMENT INFO NOTE -->
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <p class="text-center text-sm text-gray-500 reveal">All prices in EUR. We accept PayPal, SEPA bank transfer, and cryptocurrency.</p>
+  </section>
+
+  <!-- FEATURE COMPARISON -->
+  <section class="bg-white border-y border-gray-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12 reveal">Feature Comparison</h2>
+      <div class="overflow-x-auto reveal">
+        <table class="comparison-table w-full">
+          <thead>
+            <tr>
+              <th class="text-left min-w-[200px]">Feature</th>
+              <th class="min-w-[120px]">Starter<br><span class="text-violet font-normal text-xs">&euro;79/mo</span></th>
+              <th class="min-w-[120px] bg-violet/5">Professional<br><span class="text-violet font-normal text-xs">&euro;199/mo</span></th>
+              <th class="min-w-[120px]">Enterprise<br><span class="text-violet font-normal text-xs">&euro;499/mo</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Business locations</td><td>1</td><td class="bg-violet/5">3</td><td>Unlimited</td></tr>
+            <tr><td>Monthly calls</td><td>500</td><td class="bg-violet/5">2,000</td><td>Unlimited</td></tr>
+            <tr><td>Languages</td><td>DE, EN</td><td class="bg-violet/5">DE, EN, IT, FR</td><td>All</td></tr>
+            <tr><td>24/7 availability</td><td class="text-violet">&#10003;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>&lt;300ms response</td><td class="text-violet">&#10003;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Custom knowledge base</td><td>Basic</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Lead qualification</td><td class="text-violet">&#10003;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Analytics dashboard</td><td class="text-gray-300">&#10007;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Lead integration</td><td class="text-gray-300">&#10007;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Priority support</td><td class="text-gray-300">&#10007;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Call recording</td><td class="text-gray-300">&#10007;</td><td class="bg-violet/5 text-violet">&#10003;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>API access</td><td class="text-gray-300">&#10007;</td><td class="text-gray-300 bg-violet/5">&#10007;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Custom integrations</td><td class="text-gray-300">&#10007;</td><td class="text-gray-300 bg-violet/5">&#10007;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>White-label option</td><td class="text-gray-300">&#10007;</td><td class="text-gray-300 bg-violet/5">&#10007;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>SLA guarantee</td><td class="text-gray-300">&#10007;</td><td class="text-gray-300 bg-violet/5">&#10007;</td><td class="text-violet">&#10003;</td></tr>
+            <tr><td>Dedicated support</td><td>Email</td><td class="bg-violet/5">Priority email</td><td>Dedicated manager</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING FAQ -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12 reveal">Pricing FAQ</h2>
+    <div class="max-w-2xl mx-auto space-y-3 reveal">
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">How does billing work?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">You are billed monthly at the start of each billing period. Annual plans are billed once per year at a 20% discount. We accept PayPal, bank transfer (SEPA), and cryptocurrency.</p></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">What is your refund policy?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">All plans start with a 14-day free trial. After the trial, if you are not satisfied with Sofia, simply cancel before billing begins. No questions asked.</p></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">Can I upgrade or downgrade my plan?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Yes, you can upgrade or downgrade at any time. Upgrades take effect immediately with prorated billing. Downgrades take effect at the start of your next billing cycle.</p></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">What happens if I exceed my call limit?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia will continue to handle calls even if you exceed your monthly limit. We will notify you when you reach 80% and 100% of your limit and suggest an upgrade. We never cut off service mid-month.</p></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">Is there a free trial?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Yes! We offer a 14-day free trial on all plans. Sign up, test Sofia with your business, and only start paying once you are satisfied. No credit card required to start.</p></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">Do you offer annual discounts?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Yes, all plans offer a 20% discount when billed annually. Starter drops to &euro;63/mo, Professional to &euro;159/mo, and Enterprise to &euro;399/mo.</p></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+        <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-gray-900 text-sm pr-4">What payment methods do you accept?</span>
+          <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">We accept PayPal, bank transfer (SEPA/International wire), and cryptocurrency (BSC network). See the payment methods section below for details.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT METHODS -->
+  <section class="bg-white border-y border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12 reveal">Payment Methods</h2>
+      <div class="space-y-4 reveal">
+        <!-- PayPal -->
+        <a href="https://paypal.me/zelvi999" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-gray-50 rounded-2xl border border-gray-200 p-5 hover:border-violet hover:shadow-md hover:shadow-violet/10 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-[#0070BA]/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-[#0070BA]" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944 3.72a.77.77 0 01.757-.65h6.23c2.077 0 3.527.638 4.307 1.896.33.532.523 1.12.586 1.794.066.714-.013 1.563-.24 2.59l-.007.03v.025c-.589 3.108-2.545 4.685-5.816 4.685H9.323a.768.768 0 00-.758.65L7.076 21.337z"/><path d="M19.357 8.12c-.009.055-.018.11-.028.166-1.005 5.165-4.434 6.95-8.817 6.95H8.936a1.084 1.084 0 00-1.07.916l-.866 5.487a.569.569 0 00.562.66h3.947a.764.764 0 00.755-.646l.031-.163.598-3.797.038-.208a.764.764 0 01.755-.646h.476c3.078 0 5.488-1.25 6.193-4.87.295-1.512.142-2.775-.637-3.664a3.04 3.04 0 00-.871-.685c.036.1.069.2.098.3z"/></svg>
+          </div>
+          <div class="flex-1">
+            <p class="font-semibold text-gray-900 text-sm group-hover:text-violet transition-colors">PayPal</p>
+            <p class="text-xs text-gray-400 mt-0.5">paypal.me/zelvi999</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-200 group-hover:text-violet transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+
+        <!-- Bank Transfer -->
+        <div class="bg-gray-50 rounded-2xl border border-gray-200 hover:border-violet hover:shadow-md hover:shadow-violet/10 transition-all group">
+          <button onclick="togglePaymentSection('bank-details','bank-chevron')" class="w-full flex items-center gap-4 p-5 text-left">
+            <div class="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900 text-sm group-hover:text-violet transition-colors">Bank Transfer</p>
+              <p class="text-xs text-gray-400 mt-0.5">SEPA / International wire</p>
+            </div>
+            <svg id="bank-chevron" class="w-5 h-5 text-gray-200 group-hover:text-violet transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="bank-details" class="payment-expand">
+            <div class="px-5 pb-5 pt-1 border-t border-gray-100 mx-5">
+              <div class="mt-4 space-y-2">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-400">Name</span>
+                  <span class="text-gray-900 font-medium">Elvi Zekaj</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-gray-400">IBAN</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-gray-900 font-medium font-mono text-xs">AL-C0100002334708</span>
+                    <button onclick="copyToClipboard('AL-C0100002334708', this)" class="text-xs text-violet hover:text-gray-900 transition-colors px-2 py-0.5 rounded border border-gray-200 hover:border-violet">Copy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crypto -->
+        <div class="bg-gray-50 rounded-2xl border border-gray-200 hover:border-violet hover:shadow-md hover:shadow-violet/10 transition-all group">
+          <button onclick="togglePaymentSection('crypto-details','crypto-chevron')" class="w-full flex items-center gap-4 p-5 text-left">
+            <div class="w-12 h-12 rounded-xl bg-[#F7931A]/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[#F7931A]" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 2C6.478 2 2 6.478 2 12.001c0 5.523 4.478 10.001 10.001 10.001C17.524 22.002 22 17.524 22 12.001 22 6.478 17.524 2 12.001 2zm1.366 14.936V18.5h-1.5v-1.505c-1.265-.031-2.533-.36-3.173-.726l.56-2.14c.701.396 1.68.745 2.728.745.888 0 1.498-.336 1.498-.912 0-.547-.488-.893-1.62-1.279-1.631-.569-2.773-1.37-2.773-2.928 0-1.407.985-2.533 2.68-2.867V5.5h1.5v1.316c1.266.042 2.117.313 2.727.606l-.537 2.074c-.48-.215-1.327-.608-2.577-.608-.996 0-1.376.415-1.376.834 0 .498.543.815 1.824 1.289 1.83.653 2.58 1.544 2.58 2.972-.001 1.44-1.012 2.624-2.741 2.953z"/></svg>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900 text-sm group-hover:text-violet transition-colors">Cryptocurrency</p>
+              <p class="text-xs text-gray-400 mt-0.5">BSC Network</p>
+            </div>
+            <svg id="crypto-chevron" class="w-5 h-5 text-gray-200 group-hover:text-violet transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="crypto-details" class="payment-expand">
+            <div class="px-5 pb-5 pt-1 border-t border-gray-100 mx-5">
+              <div class="mt-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">BSC Wallet Address</p>
+                <div class="flex items-center gap-2">
+                  <p class="text-xs text-gray-900 font-mono bg-white rounded-lg px-3 py-2 border border-gray-100 break-all select-all flex-1">0x65ec5fcc684d1978cddaed29032aaeffc6248a84</p>
+                  <button onclick="copyToClipboard('0x65ec5fcc684d1978cddaed29032aaeffc6248a84', this)" class="text-xs text-violet hover:text-gray-900 transition-colors px-2 py-1 rounded border border-gray-200 hover:border-violet flex-shrink-0">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTERPRISE CTA -->
+  <section class="bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <h2 class="text-3xl font-bold text-white">Need a Custom Solution?</h2>
+      <p class="mt-4 text-white/60 max-w-xl mx-auto">For multi-location businesses with specific requirements, we offer tailored packages with custom integrations, dedicated support, and volume pricing.</p>
+      <a href="mailto:elvizekaj@zedigital.tech?subject=Sofia%20Custom%20Solution" class="btn-primary mt-8 inline-block">Contact elvizekaj@zedigital.tech</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-4 gap-10">
+        <div>
+          <a href="index.html" class="text-2xl font-bold text-violet">Sofia</a>
+          <p class="mt-3 text-sm text-white/40 leading-relaxed">AI-Powered Voice Receptionist for Every Business. A product by Z.E Digital Tech.</p>
+          <img src="ze-logo.png" alt="Z.E Digital Tech" class="h-6 w-auto opacity-40 mt-2">
+          <a href="https://zedigital.tech" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs text-white/30 hover:text-white transition-colors">zedigital.tech</a>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">Product</h4>
+          <div class="space-y-2">
+            <a href="features.html" class="block text-sm text-white/40 hover:text-white transition-colors">Features</a>
+            <a href="pricing.html" class="block text-sm text-white/40 hover:text-white transition-colors">Pricing</a>
+            <a href="demo.html" class="block text-sm text-white/40 hover:text-white transition-colors">Demo</a>
+            <a href="faq.html" class="block text-sm text-white/40 hover:text-white transition-colors">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">Legal</h4>
+          <div class="space-y-2">
+            <a href="terms.html" class="block text-sm text-white/40 hover:text-white transition-colors">Terms of Service</a>
+            <a href="privacy.html" class="block text-sm text-white/40 hover:text-white transition-colors">Privacy Policy</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">Contact</h4>
+          <div class="space-y-2">
+            <a href="mailto:elvizekaj@zedigital.tech" class="block text-sm text-white/40 hover:text-white transition-colors">elvizekaj@zedigital.tech</a>
+            <a href="https://github.com/zedigitaltech" target="_blank" rel="noopener noreferrer" class="block text-sm text-white/40 hover:text-white transition-colors">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/20">2026 Z.E Digital Tech. All rights reserved.</p>
+        <p class="text-xs text-white/20">Built with precision in Austria.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

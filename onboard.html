@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sofia AI — Get Started</title>
+  <meta name="description" content="Set up your AI receptionist in minutes. Upload your business documents and Sofia learns everything about your business.">
+  <meta name="author" content="Z.E Digital Tech">
+  <meta name="theme-color" content="#8B5CF6">
+  <link rel="canonical" href="https://zedigitaltech.github.io/sofia-web/onboard.html">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            violet: '#8B5CF6',
+            'violet-light': '#A78BFA',
+            'violet-dark': '#7C3AED',
+            'violet-bg': '#F5F3FF',
+            dark: '#0F0D1A',
+            'dark-subtle': '#1A1726',
+            success: '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .step-indicator { transition: all 0.3s ease; }
+    .step-indicator.active { background: #8B5CF6; color: white; }
+    .step-indicator.completed { background: #10B981; color: white; }
+    .step-indicator.pending { background: #E5E7EB; color: #9CA3AF; }
+    .drag-active { border-color: #8B5CF6; background: #F5F3FF; }
+    .fade-in { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+    .pulse-ring { animation: pulse-ring 1.5s ease-out infinite; }
+    .chat-bubble-sofia { background: #F5F3FF; border-radius: 16px 16px 16px 4px; }
+    .chat-bubble-user { background: #8B5CF6; color: white; border-radius: 16px 16px 4px 16px; }
+    .typing-dot { animation: typingBounce 1.4s infinite ease-in-out; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+  </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+
+  <!-- Nav -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-violet rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-sm">S</span>
+        </div>
+        <span class="text-xl font-bold text-dark">Sofia <span class="text-violet">AI</span></span>
+      </a>
+      <a href="index.html" class="text-sm text-gray-500 hover:text-violet transition">&larr; Back to Home</a>
+    </div>
+  </nav>
+
+  <main class="max-w-2xl mx-auto px-6 py-12">
+    <!-- Step Indicators (6 steps) -->
+    <div class="flex items-center justify-center gap-2 mb-12">
+      <div id="step-ind-1" class="step-indicator active w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold">1</div>
+      <div class="w-6 h-0.5 bg-gray-200"></div>
+      <div id="step-ind-2" class="step-indicator pending w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold">2</div>
+      <div class="w-6 h-0.5 bg-gray-200"></div>
+      <div id="step-ind-3" class="step-indicator pending w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold">3</div>
+      <div class="w-6 h-0.5 bg-gray-200"></div>
+      <div id="step-ind-4" class="step-indicator pending w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold">4</div>
+      <div class="w-6 h-0.5 bg-gray-200"></div>
+      <div id="step-ind-5" class="step-indicator pending w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold">5</div>
+      <div class="w-6 h-0.5 bg-gray-200"></div>
+      <div id="step-ind-6" class="step-indicator pending w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold">6</div>
+    </div>
+
+    <!-- Step 1: Business Info -->
+    <section id="step-1" class="fade-in">
+      <h1 class="text-3xl font-bold text-dark mb-2">Set Up Your AI Receptionist</h1>
+      <p class="text-gray-500 mb-4">Tell us about your business and Sofia will be ready in minutes.</p>
+
+      <!-- Selected Plan Banner -->
+      <div id="plan-banner" class="bg-violet-bg border border-violet/20 rounded-2xl p-5 mb-8 flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-sm font-bold text-violet" id="plan-badge">Starter</span>
+            <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day free trial</span>
+          </div>
+          <p class="text-2xl font-extrabold text-dark">&euro;<span id="plan-price">79</span><span class="text-sm font-normal text-gray-400">/mo</span></p>
+          <p class="text-xs text-gray-400 mt-0.5" id="plan-features">1 location, 2 languages, 500 calls/mo</p>
+        </div>
+        <a href="pricing.html" class="text-xs text-violet hover:text-violet-dark font-medium transition">Change plan</a>
+      </div>
+
+      <form id="register-form" class="space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+          <input type="text" id="biz-name" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet focus:border-violet outline-none transition" placeholder="Acme Law Firm">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="biz-email" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet focus:border-violet outline-none transition" placeholder="you@business.com">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <input type="tel" id="biz-phone" required class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet focus:border-violet outline-none transition" placeholder="+1 555 000 0000">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Website URL <span class="text-gray-400">(optional)</span></label>
+          <input type="url" id="biz-website" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet focus:border-violet outline-none transition" placeholder="https://yourwebsite.com">
+          <p class="text-xs text-gray-400 mt-1">We'll scrape your website to pre-fill Sofia's knowledge base.</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Phone Setup</label>
+          <select id="phone-mode" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet focus:border-violet outline-none transition bg-white">
+            <option value="auto_provision">Get a new phone number (recommended)</option>
+            <option value="byod">Forward my existing number</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full bg-violet hover:bg-violet-dark text-white font-semibold py-3.5 rounded-xl transition shadow-lg shadow-violet/25 hover:shadow-violet/40">
+          Continue
+        </button>
+      </form>
+      <p class="text-center text-xs text-gray-400 mt-4">Already have an account? <a href="dashboard.html" class="text-violet hover:underline font-medium">Sign in</a></p>
+    </section>
+
+    <!-- Step 2: Upload Documents -->
+    <section id="step-2" class="hidden fade-in">
+      <h2 class="text-2xl font-bold text-dark mb-2">Upload Business Documents</h2>
+      <p class="text-gray-500 mb-6">Upload any documents about your business: menus, service lists, FAQs, brochures, etc.</p>
+
+      <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center cursor-pointer hover:border-violet transition mb-6">
+        <div class="text-4xl mb-3">&#128196;</div>
+        <p class="font-medium text-gray-700 mb-1">Drop files here or click to browse</p>
+        <p class="text-sm text-gray-400">PDF, Word, Excel, CSV, TXT (max 20MB each)</p>
+        <input type="file" id="file-input" multiple accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt" class="hidden">
+      </div>
+
+      <div id="file-list" class="space-y-2 mb-6"></div>
+
+      <div class="flex gap-3">
+        <button id="skip-upload" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition">
+          Skip (use website only)
+        </button>
+        <button id="upload-btn" disabled class="flex-1 bg-violet hover:bg-violet-dark text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-violet/25 disabled:opacity-50 disabled:cursor-not-allowed">
+          Upload &amp; Process
+        </button>
+      </div>
+    </section>
+
+    <!-- Step 3: Processing -->
+    <section id="step-3" class="hidden fade-in">
+      <div class="text-center py-12">
+        <div class="relative inline-block mb-6">
+          <div class="w-20 h-20 bg-violet/10 rounded-full flex items-center justify-center">
+            <div class="w-12 h-12 bg-violet rounded-full flex items-center justify-center">
+              <span class="text-white text-xl font-bold">S</span>
+            </div>
+          </div>
+          <div class="absolute inset-0 rounded-full border-2 border-violet pulse-ring"></div>
+        </div>
+        <h2 class="text-2xl font-bold text-dark mb-2">Sofia is Learning Your Business</h2>
+        <p class="text-gray-500 mb-8" id="processing-status">Extracting information from your documents...</p>
+
+        <div class="bg-gray-50 rounded-2xl p-6 text-left max-w-sm mx-auto">
+          <div class="space-y-3" id="processing-steps">
+            <div class="flex items-center gap-3" id="proc-extract">
+              <div class="w-6 h-6 rounded-full bg-violet flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-white animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+              </div>
+              <span class="text-sm text-gray-700">Extracting text from documents</span>
+            </div>
+            <div class="flex items-center gap-3" id="proc-ai">
+              <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                <span class="text-xs text-gray-400">2</span>
+              </div>
+              <span class="text-sm text-gray-400">AI structuring knowledge base</span>
+            </div>
+            <div class="flex items-center gap-3" id="proc-sms">
+              <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                <span class="text-xs text-gray-400">3</span>
+              </div>
+              <span class="text-sm text-gray-400">Finalizing knowledge base</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4: Review -->
+    <section id="step-4" class="hidden fade-in">
+      <h2 class="text-2xl font-bold text-dark mb-2">Review Your Knowledge Base</h2>
+      <p class="text-gray-500 mb-6">Sofia has extracted this from your documents. Check if everything looks correct.</p>
+
+      <div class="bg-violet-bg rounded-2xl p-6 mb-6" id="knowledge-summary">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-violet rounded-xl flex items-center justify-center">
+            <span class="text-white font-bold">S</span>
+          </div>
+          <div>
+            <p class="font-semibold text-dark" id="summary-biz-name">Your Business</p>
+            <p class="text-sm text-gray-500" id="summary-stats">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button id="reject-btn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition">
+          Re-upload Documents
+        </button>
+        <button id="confirm-btn" class="flex-1 bg-success hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-green-500/25">
+          Looks Good — Test Sofia
+        </button>
+      </div>
+    </section>
+
+    <!-- Step 5: Test Sofia -->
+    <section id="step-5" class="hidden fade-in">
+      <h2 class="text-2xl font-bold text-dark mb-2">Test Your Sofia</h2>
+      <p class="text-gray-500 mb-6">Chat with Sofia below to make sure she knows your business. Try asking about your services, hours, or team.</p>
+
+      <!-- Chat Widget -->
+      <div class="border border-gray-200 rounded-2xl overflow-hidden mb-6 shadow-sm">
+        <!-- Chat Header -->
+        <div class="bg-dark px-5 py-4 flex items-center gap-3">
+          <div class="w-9 h-9 bg-violet rounded-full flex items-center justify-center">
+            <span class="text-white font-bold text-sm">S</span>
+          </div>
+          <div>
+            <p class="text-white text-sm font-semibold" id="chat-header-name">Sofia AI</p>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 bg-success rounded-full"></span>
+              <span class="text-xs text-white/50">Online</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chat-messages" class="p-4 space-y-3 min-h-[300px] max-h-[400px] overflow-y-auto bg-gray-50">
+          <!-- Messages injected by JS -->
+        </div>
+
+        <!-- Quick Chips -->
+        <div id="chat-chips" class="px-4 py-2 bg-white border-t border-gray-100 flex flex-wrap gap-2">
+          <button onclick="sendTestMessage('What services do you offer?')" class="text-xs bg-violet-bg text-violet px-3 py-1.5 rounded-full hover:bg-violet/10 transition">What services do you offer?</button>
+          <button onclick="sendTestMessage('What are your hours?')" class="text-xs bg-violet-bg text-violet px-3 py-1.5 rounded-full hover:bg-violet/10 transition">What are your hours?</button>
+          <button onclick="sendTestMessage('Tell me about your team')" class="text-xs bg-violet-bg text-violet px-3 py-1.5 rounded-full hover:bg-violet/10 transition">Tell me about your team</button>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="px-4 py-3 bg-white border-t border-gray-100 flex gap-2">
+          <input type="text" id="chat-input" placeholder="Type a question to test Sofia..." class="flex-1 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-violet focus:border-violet outline-none transition"
+            onkeydown="if(event.key==='Enter') sendTestMessage()">
+          <button onclick="sendTestMessage()" class="bg-violet hover:bg-violet-dark text-white px-4 py-2.5 rounded-xl transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button id="test-reupload-btn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition">
+          Something's Wrong — Re-upload
+        </button>
+        <button id="go-live-btn" class="flex-1 bg-success hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-green-500/25">
+          Looks Good — Go Live
+        </button>
+      </div>
+    </section>
+
+    <!-- Step 6: Live / Dashboard -->
+    <section id="step-6" class="hidden fade-in">
+      <div class="text-center py-6">
+        <div class="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h2 class="text-3xl font-bold text-dark mb-2">Sofia is Live!</h2>
+        <p class="text-gray-500 mb-8">Your AI receptionist is ready to take calls 24/7.</p>
+      </div>
+
+      <!-- Dashboard Card -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden mb-6">
+        <div class="bg-dark px-6 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-violet rounded-full flex items-center justify-center">
+              <span class="text-white font-bold text-sm">S</span>
+            </div>
+            <div>
+              <p class="text-white text-sm font-semibold" id="dash-biz-name">Your Business</p>
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-2 h-2 bg-success rounded-full"></span>
+                <span class="text-xs text-success">Active</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-5">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Phone Number</p>
+              <p class="text-lg font-bold text-dark" id="sofia-number">Pending Setup</p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Language</p>
+              <p class="text-lg font-bold text-dark" id="dash-language">--</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-violet-bg rounded-xl p-3 text-center">
+              <p class="text-2xl font-bold text-violet" id="dash-services">0</p>
+              <p class="text-xs text-gray-500">Services</p>
+            </div>
+            <div class="bg-violet-bg rounded-xl p-3 text-center">
+              <p class="text-2xl font-bold text-violet" id="dash-faqs">0</p>
+              <p class="text-xs text-gray-500">FAQs</p>
+            </div>
+            <div class="bg-success/10 rounded-xl p-3 text-center">
+              <p class="text-2xl font-bold text-success">24/7</p>
+              <p class="text-xs text-gray-500">Available</p>
+            </div>
+          </div>
+
+          <div id="byod-instructions" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <p class="text-sm text-amber-700 font-medium mb-1">Forwarding Setup Required</p>
+            <p class="text-sm text-amber-600" id="byod-text"></p>
+          </div>
+
+          <!-- Plan & Trial Info -->
+          <div class="bg-violet-bg border border-violet/20 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-sm font-semibold text-dark">Your Plan: <span id="dash-plan-name" class="text-violet">Starter</span></p>
+              <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day free trial</span>
+            </div>
+            <p class="text-xs text-gray-500">Your free trial starts today. No payment required until <span id="dash-trial-end" class="font-medium text-dark"></span>.</p>
+          </div>
+
+          <!-- Payment Methods -->
+          <div>
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Payment After Trial</p>
+            <p class="text-xs text-gray-500 mb-3">After your 14-day trial, choose one of these methods to continue:</p>
+            <div class="space-y-2">
+              <a href="https://paypal.me/zelvi999" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 hover:border-violet transition group">
+                <div class="w-8 h-8 rounded-lg bg-[#0070BA]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-[#0070BA]" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944 3.72a.77.77 0 01.757-.65h6.23c2.077 0 3.527.638 4.307 1.896.33.532.523 1.12.586 1.794.066.714-.013 1.563-.24 2.59l-.007.03v.025c-.589 3.108-2.545 4.685-5.816 4.685H9.323a.768.768 0 00-.758.65L7.076 21.337z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-gray-700 group-hover:text-violet transition">PayPal</p>
+                </div>
+                <span class="text-xs text-gray-300 group-hover:text-violet transition">&rarr;</span>
+              </a>
+              <a href="mailto:elvizekaj@zedigital.tech?subject=Sofia%20Payment%20-%20Bank%20Transfer" class="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 hover:border-violet transition group">
+                <div class="w-8 h-8 rounded-lg bg-gray-200 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-gray-700 group-hover:text-violet transition">Bank Transfer (SEPA)</p>
+                </div>
+                <span class="text-xs text-gray-300 group-hover:text-violet transition">&rarr;</span>
+              </a>
+            </div>
+            <p class="text-xs text-gray-400 mt-2 text-center">See all options on <a href="pricing.html" class="text-violet hover:underline">pricing page</a></p>
+          </div>
+
+          <!-- Events Timeline -->
+          <div>
+            <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Onboarding Timeline</p>
+            <div class="space-y-2" id="dash-events"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Links -->
+      <div class="grid grid-cols-3 gap-3">
+        <button onclick="showStep(2)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition text-sm">
+          Edit Knowledge
+        </button>
+        <a href="dashboard.html" class="bg-violet-bg hover:bg-violet/10 text-violet font-medium py-3 rounded-xl transition text-sm text-center">
+          Go to Dashboard
+        </a>
+        <a href="mailto:elvizekaj@zedigital.tech?subject=Sofia%20Account%20Management" class="bg-violet hover:bg-violet-dark text-white font-medium py-3 rounded-xl transition text-sm text-center">
+          Contact Support
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100 py-8 mt-16">
+    <div class="max-w-5xl mx-auto px-6 text-center text-sm text-gray-400">
+      &copy; 2026 Z.E Digital Tech. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://api.sofia.zedigital.tech/api/onboard';
+    const TOTAL_STEPS = 6;
+    let currentStep = 1;
+    let clientId = null;
+    let clientToken = null;
+    let knowledgeSummaryData = null;
+
+    const PLANS = {
+      starter: { name: 'Starter', price: '79', features: '1 location, 2 languages, 500 calls/mo' },
+      professional: { name: 'Professional', price: '199', features: '3 locations, all languages, 2,000 calls/mo' },
+      enterprise: { name: 'Enterprise', price: '499', features: 'Unlimited locations, unlimited calls, API access' }
+    };
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPlan = urlParams.get('plan') || 'starter';
+    const planInfo = PLANS[selectedPlan] || PLANS.starter;
+
+    function authHeaders(extra = {}) {
+      const h = { ...extra };
+      if (clientToken) h['Authorization'] = `Bearer ${clientToken}`;
+      return h;
+    }
+    let selectedFiles = [];
+
+    // Populate plan banner
+    document.getElementById('plan-badge').textContent = planInfo.name;
+    document.getElementById('plan-price').textContent = planInfo.price;
+    document.getElementById('plan-features').textContent = planInfo.features;
+
+    // Resume existing session if available
+    const storedClientId = sessionStorage.getItem('sofia_clientId');
+    const storedToken = sessionStorage.getItem('sofia_clientToken');
+    const isEditMode = urlParams.get('edit') === '1';
+    if (storedClientId && storedToken && !urlParams.get('plan')) {
+      clientId = storedClientId;
+      clientToken = storedToken;
+      if (isEditMode) {
+        // Coming from dashboard "Edit Knowledge" — go straight to upload step
+        showStep(2);
+      } else {
+        fetch(`${API_BASE}/${clientId}/status`, { headers: authHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.client) {
+              if (data.client.status === 'active') {
+                window.location.href = 'dashboard.html';
+              } else {
+                showStep(2);
+              }
+            }
+          })
+          .catch(() => {
+            sessionStorage.removeItem('sofia_clientId');
+            sessionStorage.removeItem('sofia_clientToken');
+          });
+      }
+    }
+
+    // Step navigation
+    function showStep(step) {
+      for (let i = 1; i <= TOTAL_STEPS; i++) {
+        document.getElementById(`step-${i}`).classList.toggle('hidden', i !== step);
+        const ind = document.getElementById(`step-ind-${i}`);
+        ind.classList.remove('active', 'completed', 'pending');
+        if (i < step) ind.classList.add('completed');
+        else if (i === step) ind.classList.add('active');
+        else ind.classList.add('pending');
+      }
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Step 1: Register
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Setting up...';
+
+      try {
+        const res = await fetch(`${API_BASE}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('biz-name').value,
+            email: document.getElementById('biz-email').value,
+            phone: document.getElementById('biz-phone').value,
+            plan: selectedPlan,
+            phoneMode: document.getElementById('phone-mode').value,
+            websiteUrl: document.getElementById('biz-website').value || null
+          })
+        });
+        const data = await res.json();
+        if (data.clientId) {
+          clientId = data.clientId;
+          clientToken = data.clientToken;
+          sessionStorage.setItem('sofia_clientId', clientId);
+          sessionStorage.setItem('sofia_clientToken', clientToken);
+
+          const websiteUrl = document.getElementById('biz-website').value;
+          if (websiteUrl) {
+            fetch(`${API_BASE}/${clientId}/website`, {
+              method: 'POST',
+              headers: authHeaders({ 'Content-Type': 'application/json' }),
+              body: JSON.stringify({ websiteUrl })
+            }).catch(err => console.warn('Website processing failed:', err));
+          }
+
+          showStep(2);
+        } else {
+          alert(data.error || 'Registration failed');
+        }
+      } catch (err) {
+        alert('Connection error. Please try again.');
+      }
+      btn.disabled = false;
+      btn.textContent = 'Continue';
+    });
+
+    // Step 2: File upload
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    const uploadBtn = document.getElementById('upload-btn');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-active'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-active'));
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-active');
+      addFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => addFiles(fileInput.files));
+
+    function addFiles(files) {
+      for (const f of files) {
+        if (selectedFiles.length >= 10) break;
+        selectedFiles.push(f);
+      }
+      renderFileList();
+    }
+
+    function renderFileList() {
+      fileList.innerHTML = selectedFiles.map((f, i) => `
+        <div class="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+          <div class="flex items-center gap-3">
+            <span class="text-lg">${getFileIcon(f.name)}</span>
+            <div>
+              <p class="text-sm font-medium text-gray-700">${f.name}</p>
+              <p class="text-xs text-gray-400">${(f.size / 1024).toFixed(1)} KB</p>
+            </div>
+          </div>
+          <button onclick="removeFile(${i})" class="text-gray-400 hover:text-red-500 transition">&times;</button>
+        </div>
+      `).join('');
+      uploadBtn.disabled = selectedFiles.length === 0;
+    }
+
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      renderFileList();
+    }
+
+    function getFileIcon(name) {
+      const ext = name.split('.').pop().toLowerCase();
+      if (ext === 'pdf') return '&#128212;';
+      if (['doc', 'docx'].includes(ext)) return '&#128196;';
+      if (['xls', 'xlsx', 'csv'].includes(ext)) return '&#128202;';
+      return '&#128196;';
+    }
+
+    uploadBtn.addEventListener('click', async () => {
+      if (!clientId || selectedFiles.length === 0) return;
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = 'Uploading...';
+
+      const formData = new FormData();
+      selectedFiles.forEach(f => formData.append('files', f));
+
+      try {
+        const res = await fetch(`${API_BASE}/${clientId}/upload`, {
+          method: 'POST',
+          headers: authHeaders(),
+          body: formData
+        });
+        const data = await res.json();
+        if (data.status === 'processing') {
+          showStep(3);
+          startPolling();
+        } else {
+          alert(data.error || 'Upload failed');
+        }
+      } catch (err) {
+        alert('Upload failed. Please try again.');
+      }
+      uploadBtn.disabled = false;
+      uploadBtn.textContent = 'Upload & Process';
+    });
+
+    document.getElementById('skip-upload').addEventListener('click', () => {
+      if (!clientId) return;
+      showStep(3);
+      startPolling();
+    });
+
+    // Step 3: Processing polling
+    let pollInterval = null;
+
+    function startPolling() {
+      pollInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`${API_BASE}/${clientId}/status`, {
+            headers: authHeaders()
+          });
+          const data = await res.json();
+
+          if (data.client.status === 'pending_verification') {
+            clearInterval(pollInterval);
+            updateProcessingSteps('complete');
+            knowledgeSummaryData = data.knowledgeSummary;
+
+            if (data.knowledgeSummary) {
+              document.getElementById('summary-biz-name').textContent = data.knowledgeSummary.businessName || 'Your Business';
+              document.getElementById('summary-stats').textContent = `${data.knowledgeSummary.serviceCount} services, ${data.knowledgeSummary.faqCount} FAQs extracted`;
+            }
+
+            setTimeout(() => showStep(4), 1000);
+          } else if (data.client.status === 'processing') {
+            const hasFiles = data.files && data.files.some(f => f.processing_status === 'extracted');
+            if (hasFiles) updateProcessingSteps('ai');
+          } else if (data.client.status === 'pending_upload') {
+            clearInterval(pollInterval);
+            alert('Processing failed. Please try uploading again.');
+            showStep(2);
+          }
+        } catch (err) {
+          console.warn('Poll error:', err);
+        }
+      }, 3000);
+    }
+
+    function updateProcessingSteps(phase) {
+      const steps = {
+        extract: document.getElementById('proc-extract'),
+        ai: document.getElementById('proc-ai'),
+        sms: document.getElementById('proc-sms')
+      };
+
+      if (phase === 'ai' || phase === 'complete') {
+        steps.extract.querySelector('div').innerHTML = '<svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>';
+        steps.extract.querySelector('div').className = 'w-6 h-6 rounded-full bg-success flex items-center justify-center';
+        steps.extract.querySelector('span').className = 'text-sm text-gray-700';
+
+        steps.ai.querySelector('div').innerHTML = '<svg class="w-3.5 h-3.5 text-white animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>';
+        steps.ai.querySelector('div').className = 'w-6 h-6 rounded-full bg-violet flex items-center justify-center';
+        steps.ai.querySelector('span').className = 'text-sm text-gray-700';
+      }
+
+      if (phase === 'complete') {
+        steps.ai.querySelector('div').innerHTML = '<svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>';
+        steps.ai.querySelector('div').className = 'w-6 h-6 rounded-full bg-success flex items-center justify-center';
+
+        steps.sms.querySelector('div').innerHTML = '<svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>';
+        steps.sms.querySelector('div').className = 'w-6 h-6 rounded-full bg-success flex items-center justify-center';
+        steps.sms.querySelector('span').className = 'text-sm text-gray-700';
+
+        document.getElementById('processing-status').textContent = 'Knowledge base ready!';
+      }
+    }
+
+    // Step 4: Review — Confirm goes to Test (step 5)
+    document.getElementById('confirm-btn').addEventListener('click', () => {
+      const bizName = knowledgeSummaryData?.businessName || document.getElementById('biz-name').value;
+      document.getElementById('chat-header-name').textContent = `Sofia — ${bizName}`;
+
+      // Add initial greeting
+      const chatMessages = document.getElementById('chat-messages');
+      chatMessages.innerHTML = '';
+      addChatBubble('sofia', `Hi! I'm Sofia, your AI receptionist for ${bizName}. Ask me anything about your business to test my knowledge.`);
+
+      showStep(5);
+    });
+
+    document.getElementById('reject-btn').addEventListener('click', () => {
+      selectedFiles = [];
+      renderFileList();
+      showStep(2);
+    });
+
+    // Step 5: Test Chat
+    let chatBusy = false;
+
+    function addChatBubble(type, text) {
+      const chatMessages = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'}`;
+      div.innerHTML = `<div class="${type === 'user' ? 'chat-bubble-user' : 'chat-bubble-sofia'} px-4 py-3 max-w-[80%] text-sm whitespace-pre-line">${text}</div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTyping() {
+      const chatMessages = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.id = 'typing-indicator';
+      div.className = 'flex justify-start';
+      div.innerHTML = `<div class="chat-bubble-sofia px-4 py-3 flex gap-1.5 items-center">
+        <span class="typing-dot w-2 h-2 bg-violet/50 rounded-full"></span>
+        <span class="typing-dot w-2 h-2 bg-violet/50 rounded-full"></span>
+        <span class="typing-dot w-2 h-2 bg-violet/50 rounded-full"></span>
+      </div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function hideTyping() {
+      const el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    }
+
+    async function sendTestMessage(preset) {
+      if (chatBusy) return;
+      const input = document.getElementById('chat-input');
+      const message = preset || input.value.trim();
+      if (!message) return;
+
+      input.value = '';
+      addChatBubble('user', message);
+      chatBusy = true;
+      showTyping();
+
+      try {
+        const res = await fetch(`${API_BASE}/${clientId}/test-chat`, {
+          method: 'POST',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        hideTyping();
+        addChatBubble('sofia', data.reply || data.error || 'No response');
+      } catch (err) {
+        hideTyping();
+        addChatBubble('sofia', 'Connection error. Please try again.');
+      }
+      chatBusy = false;
+    }
+
+    document.getElementById('test-reupload-btn').addEventListener('click', () => {
+      selectedFiles = [];
+      renderFileList();
+      showStep(2);
+    });
+
+    // Step 5 -> Step 6: Go Live (activate)
+    document.getElementById('go-live-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('go-live-btn');
+      btn.disabled = true;
+      btn.textContent = 'Activating...';
+
+      try {
+        await fetch(`${API_BASE}/${clientId}/verify`, {
+          method: 'POST',
+          headers: authHeaders()
+        });
+
+        const res = await fetch(`${API_BASE}/${clientId}/activate`, {
+          method: 'POST',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({})
+        });
+        const data = await res.json();
+
+        if (data.status === 'active') {
+          const bizName = document.getElementById('biz-name').value;
+          document.getElementById('dash-biz-name').textContent = bizName;
+          document.getElementById('sofia-number').textContent = data.phoneNumber || data.forwardingNumber || 'Pending Setup';
+
+          if (knowledgeSummaryData) {
+            document.getElementById('dash-services').textContent = knowledgeSummaryData.serviceCount || '0';
+            document.getElementById('dash-faqs').textContent = knowledgeSummaryData.faqCount || '0';
+            document.getElementById('dash-language').textContent = (knowledgeSummaryData.language || 'en').toUpperCase();
+          }
+
+          if (data.instructions) {
+            document.getElementById('byod-instructions').classList.remove('hidden');
+            document.getElementById('byod-text').textContent = data.instructions;
+          }
+
+          // Populate plan info & trial end date
+          document.getElementById('dash-plan-name').textContent = `${planInfo.name} — €${planInfo.price}/mo`;
+          const trialEnd = new Date();
+          trialEnd.setDate(trialEnd.getDate() + 14);
+          document.getElementById('dash-trial-end').textContent = trialEnd.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+          // Load events timeline
+          try {
+            const statusRes = await fetch(`${API_BASE}/${clientId}/status`, { headers: authHeaders() });
+            const statusData = await statusRes.json();
+            const eventsEl = document.getElementById('dash-events');
+            if (statusData.events) {
+              eventsEl.innerHTML = statusData.events.slice(0, 5).map(ev => `
+                <div class="flex items-center gap-3 text-sm">
+                  <span class="w-2 h-2 bg-violet rounded-full flex-shrink-0"></span>
+                  <span class="text-gray-600">${ev.event_type.replace(/_/g, ' ')}</span>
+                  <span class="text-gray-400 text-xs ml-auto">${new Date(ev.created_at).toLocaleTimeString()}</span>
+                </div>
+              `).join('');
+            }
+          } catch {}
+
+          showStep(6);
+        } else {
+          alert(data.error || 'Activation failed');
+        }
+      } catch (err) {
+        alert('Activation failed. Please try again.');
+      }
+      btn.disabled = false;
+      btn.textContent = 'Looks Good — Go Live';
+    });
+  </script>
+</body>
+</html>
