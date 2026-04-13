@@ -24,6 +24,8 @@
         dark: '#0F0D1A',
         'dark-subtle': '#1A1726',
         success: '#10B981',
+        navy: '#1B2A4A',
+        gold: '#C9A84C',
       }
     }
   }
@@ -102,14 +104,14 @@
             <span class="font-semibold text-gray-900 text-sm pr-4">How does Sofia work?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">When someone calls your business, the call routes through a Twilio SIP trunk to Sofia's infrastructure hosted on Fly.io. Deepgram transcribes the caller's speech in real-time, our AI processes the intent and generates a response, and Cartesia converts the response to natural-sounding speech. The entire process takes less than 300 milliseconds.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">When someone calls your business, the call routes through a SIP trunk to Sofia's infrastructure. Google Gemini Live processes the audio end-to-end in real time — understanding the caller's speech and generating a natural voice response in one step, with no separate transcription or text-to-speech pipeline. Typical response latency is under 500 milliseconds.</p></div>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
           <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
             <span class="font-semibold text-gray-900 text-sm pr-4">What languages does Sofia support?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia currently supports German, English, Italian, and French. Sofia auto-detects the caller's language and responds naturally. The Starter plan includes 2 languages. Professional and Enterprise plans include all four languages. Additional languages can be added upon request for Enterprise customers.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia currently supports Albanian, English, Italian, German, French, and Spanish — six languages total. Sofia auto-detects the caller's language and responds naturally without any configuration needed. The Starter plan includes 2 languages. Professional and Enterprise plans include all six languages. Additional languages can be added upon request for Enterprise customers.</p></div>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
           <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
@@ -177,7 +179,7 @@
             <span class="font-semibold text-gray-900 text-sm pr-4">What payment methods do you accept?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">We accept PayPal (paypal.me/zelvi999), bank transfer via IBAN (AL-C0100002334708), and cryptocurrency on the BSC network (0x65ec5fcc684d1978cddaed29032aaeffc6248a84).</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">We accept PayPal and bank transfer via SEPA/IBAN. Contact us at <a href="mailto:elvizekaj@zedigital.tech" class="text-violet hover:text-violet-dark">elvizekaj@zedigital.tech</a> for payment details.</p></div>
         </div>
       </div>
     </div>
@@ -196,14 +198,14 @@
             <span class="font-semibold text-gray-900 text-sm pr-4">How long does setup take?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia can typically be deployed in under 24 hours. The process involves configuring the Twilio SIP trunk, uploading your business knowledge base (services, pricing, policies, FAQs), and running test calls. Most businesses are fully operational the same day.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia can typically be deployed in under 24 hours. The process involves configuring the SIP trunk forwarding, uploading your business knowledge base (services, pricing, policies, FAQs), and running test calls. Most businesses are fully operational the same day.</p></div>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
           <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
             <span class="font-semibold text-gray-900 text-sm pr-4">Do I need to change my phone system?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">No. Sofia works through a Twilio SIP trunk integration. Your existing phone number simply forwards to Sofia's infrastructure. No hardware changes or installations are needed at your property.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">No. Sofia works through a SIP trunk integration with your existing phone provider. Your existing phone number simply forwards to Sofia's infrastructure. No hardware changes or installations are needed at your location.</p></div>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
           <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
@@ -224,7 +226,7 @@
             <span class="font-semibold text-gray-900 text-sm pr-4">What is the uptime guarantee?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia is hosted on Fly.io with a 99.9% uptime target. Enterprise plan customers receive a formal SLA guarantee with service credits for any downtime below the guaranteed threshold.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia is hosted on Hetzner EU servers with a 99.9% uptime target. Enterprise plan customers receive a formal SLA guarantee with service credits for any downtime below the guaranteed threshold.</p></div>
         </div>
       </div>
     </div>
@@ -250,7 +252,7 @@
             <span class="font-semibold text-gray-900 text-sm pr-4">Where is call data stored?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Call data is processed and stored in EU data centers (via Fly.io's European regions). Call recordings (if enabled) are encrypted at rest and in transit. Data retention follows your configured policy, with automatic deletion after the retention period expires.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Call data is processed and stored in EU data centres (Hetzner). Call recordings (if enabled) are encrypted at rest and in transit. Data retention follows your configured policy, with automatic deletion after the retention period expires.</p></div>
         </div>
         <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
           <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
@@ -271,7 +273,7 @@
             <span class="font-semibold text-gray-900 text-sm pr-4">Which third-party services does Sofia use?</span>
             <svg class="faq-chevron w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia uses Twilio for telephony (SIP trunking), Deepgram for speech-to-text transcription, Cartesia for text-to-speech voice generation, LiveKit for real-time audio streaming, and Fly.io for hosting. All services are chosen for their enterprise-grade security and GDPR compliance.</p></div>
+          <div class="faq-answer px-6"><p class="text-sm text-gray-500 leading-relaxed pb-5">Sofia uses Zadarma for telephony (SIP trunking), LiveKit for real-time audio routing, Google Gemini Live for speech-to-speech AI processing, and Hetzner for hosting on EU servers. All services are selected for enterprise-grade security and GDPR compliance.</p></div>
         </div>
       </div>
     </div>

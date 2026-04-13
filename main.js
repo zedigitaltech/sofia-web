@@ -678,9 +678,9 @@ function initROICalculator() {
     const human = currentHuman;
     const savingsM = Math.max(0, human - SOFIA_COST);
     const savingsY = savingsM * 12;
-    if (humanCostEl) humanCostEl.textContent = '$' + human.toFixed(2);
-    if (savingsMonthEl) savingsMonthEl.textContent = '$' + savingsM.toFixed(2);
-    if (savingsYearEl) savingsYearEl.textContent = '$' + savingsY.toFixed(2) + '/year';
+    if (humanCostEl) humanCostEl.textContent = '€' + human.toFixed(2);
+    if (savingsMonthEl) savingsMonthEl.textContent = '€' + savingsM.toFixed(2);
+    if (savingsYearEl) savingsYearEl.textContent = '€' + savingsY.toFixed(2) + '/year';
   }
 
   callsSlider.addEventListener('input', calculateROI);

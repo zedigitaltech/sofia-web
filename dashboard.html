@@ -19,6 +19,8 @@
             dark: '#0F0D1A',
             'dark-subtle': '#1A1726',
             success: '#10B981',
+            navy: '#1B2A4A',
+            gold: '#C9A84C',
           }
         }
       }
@@ -586,7 +588,10 @@
       const chatMessages = document.getElementById('chat-messages');
       const div = document.createElement('div');
       div.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'}`;
-      div.innerHTML = `<div class="${type === 'user' ? 'chat-bubble-user' : 'chat-bubble-sofia'} px-4 py-3 max-w-[80%] text-sm whitespace-pre-line">${text}</div>`;
+      const bubble = document.createElement('div');
+      bubble.className = `${type === 'user' ? 'chat-bubble-user' : 'chat-bubble-sofia'} px-4 py-3 max-w-[80%] text-sm whitespace-pre-line`;
+      bubble.textContent = text;
+      div.appendChild(bubble);
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }

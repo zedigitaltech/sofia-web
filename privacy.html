@@ -23,6 +23,8 @@
             dark: '#0F0D1A',
             'dark-subtle': '#1A1726',
             success: '#10B981',
+            navy: '#1B2A4A',
+            gold: '#C9A84C',
           }
         }
       }
@@ -91,7 +93,7 @@
       <h3>1.2 Caller Data</h3>
       <p>When callers interact with Sofia, we process:</p>
       <ul>
-        <li>Caller phone number (from Twilio)</li>
+        <li>Caller phone number (from your telephony provider)</li>
         <li>Voice audio streams (processed in real-time, not stored by default)</li>
         <li>Speech-to-text transcriptions of conversations</li>
         <li>Call metadata (timestamp, duration, language detected)</li>
@@ -117,17 +119,15 @@
         <li><strong>Support:</strong> Responding to your inquiries and providing technical assistance.</li>
         <li><strong>Legal compliance:</strong> Fulfilling legal obligations and enforcing our Terms of Service.</li>
       </ul>
-      <p>We do not sell personal data to third parties. We do not use guest call data for advertising purposes.</p>
+      <p>We do not sell personal data to third parties. We do not use caller data for advertising purposes.</p>
 
       <h2>3. Third-Party Services</h2>
       <p>Sofia uses the following third-party services to deliver the Service. Each processes data in accordance with their own privacy policies and GDPR compliance frameworks:</p>
       <ul>
-        <li><strong>Twilio</strong> (twilio.com) — Telephony and SIP trunking. Processes caller phone numbers and routes calls. GDPR compliant with DPA available.</li>
-        <li><strong>Deepgram</strong> (deepgram.com) — Speech-to-text transcription. Processes voice audio in real-time. Data is not retained after processing.</li>
-        <li><strong>Google Cloud</strong> (cloud.google.com) — AI model inference. Processes text data for generating responses. EU data processing available.</li>
-        <li><strong>LiveKit</strong> (livekit.io) — Real-time audio streaming. Processes voice data streams. Data is not stored.</li>
-        <li><strong>Fly.io</strong> (fly.io) — Application hosting. Hosts Sofia's backend in EU regions. GDPR compliant infrastructure.</li>
-        <li><strong>Cartesia</strong> (cartesia.ai) — Text-to-speech voice generation. Processes text to generate speech audio. Data is not retained.</li>
+        <li><strong>Zadarma</strong> (zadarma.com) — Telephony and SIP trunking. Processes caller phone numbers and routes calls. GDPR compliant infrastructure.</li>
+        <li><strong>LiveKit</strong> (livekit.io) — Real-time audio routing. Processes voice data streams during active calls. Data is not stored.</li>
+        <li><strong>Google Gemini</strong> (ai.google.dev) — Speech-to-speech AI processing. Processes voice audio to generate spoken responses. Data is processed under Google's GDPR DPA.</li>
+        <li><strong>Hetzner</strong> (hetzner.com) — Application hosting. Hosts Sofia's infrastructure in EU data centres. GDPR compliant with DPA available.</li>
       </ul>
 
       <h2>4. Data Retention</h2>
@@ -135,13 +135,13 @@
       <ul>
         <li><strong>Account data:</strong> Retained for the duration of your subscription plus 90 days after termination.</li>
         <li><strong>Call transcriptions:</strong> Retained for 90 days by default, configurable per your preferences.</li>
-        <li><strong>Call recordings:</strong> Retained for the period configured by the hotel (30, 60, or 90 days), then automatically deleted.</li>
+        <li><strong>Call recordings:</strong> Retained for the period configured by the business (30, 60, or 90 days), then automatically deleted.</li>
         <li><strong>Analytics data:</strong> Aggregated analytics data is retained for 12 months. Individual call data is anonymized after the retention period.</li>
         <li><strong>Billing records:</strong> Retained for 7 years as required by tax and accounting regulations.</li>
       </ul>
 
       <h2>5. Your Rights (GDPR)</h2>
-      <p>Under the GDPR, you and the guests whose data we process have the following rights:</p>
+      <p>Under the GDPR, you and the data subjects whose data we process on your behalf have the following rights:</p>
       <ul>
         <li><strong>Right of access:</strong> You may request a copy of the personal data we hold about you or your business's callers.</li>
         <li><strong>Right to rectification:</strong> You may request correction of inaccurate personal data.</li>
@@ -164,7 +164,7 @@
       </ul>
 
       <h2>7. International Data Transfers</h2>
-      <p>Sofia's primary infrastructure is located in the European Union (Fly.io EU regions). Some third-party services may process data in locations outside the EU. In such cases, we ensure appropriate safeguards are in place, such as Standard Contractual Clauses (SCCs) or adequacy decisions.</p>
+      <p>Sofia's primary infrastructure is located in the European Union (Hetzner EU data centres). Some third-party services may process data in locations outside the EU. In such cases, we ensure appropriate safeguards are in place, such as Standard Contractual Clauses (SCCs) or adequacy decisions.</p>
 
       <h2>8. Cookie Policy</h2>
       <p>Our website uses minimal cookies:</p>
