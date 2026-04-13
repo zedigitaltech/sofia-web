@@ -442,7 +442,7 @@
 
       // Account details
       document.getElementById('dash-email').textContent = c.email || '--';
-      document.getElementById('dash-phone').textContent = c.sip_number || c.twilio_number || 'Pending Setup';
+      document.getElementById('dash-phone').textContent = c.sip_number || 'Pending Setup';
       document.getElementById('dash-language').textContent = (c.language || 'en').toUpperCase();
       document.getElementById('dash-phone-mode').textContent = c.phone_mode === 'byod' ? 'Forward Existing' : 'New Number';
       document.getElementById('dash-kb-version').textContent = c.knowledge_version ? `v${c.knowledge_version}` : 'Not set';
