@@ -13,4 +13,5 @@ Crawl-delay: 1
 # Block common bot traps
 Disallow: /api/
 Disallow: /dashboard.html
+Disallow: /onboard.html
 Disallow: /archive/

@@ -6,6 +6,7 @@
   <title>Dashboard — Sofia AI</title>
   <meta name="description" content="Manage your Sofia AI receptionist. View your plan, knowledge base, and account settings.">
   <meta name="theme-color" content="#8B5CF6">
+  <meta name="robots" content="noindex,nofollow">
   <link rel="stylesheet" href="styles-tailwind.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -326,8 +327,7 @@
           if (data.clientId && data.clientToken) {
             clientId = data.clientId;
             clientToken = data.clientToken;
-            sessionStorage.setItem('sofia_clientId', clientId);
-            sessionStorage.setItem('sofia_clientToken', clientToken);
+
             history.replaceState(null, '', window.location.pathname);
             await loadDashboard();
             return;
@@ -340,12 +340,9 @@
         return;
       }
 
-      const storedId = sessionStorage.getItem('sofia_clientId');
-      const storedToken = sessionStorage.getItem('sofia_clientToken');
-      if (storedId && storedToken) {
-        clientId = storedId;
-        clientToken = storedToken;
-        showView('verifying');
+      showView('login');
+      // (session stored in memory only — refresh requires new magic link)
+      if (false) {
         try {
           await loadDashboard();
           return;
@@ -507,12 +504,22 @@
       // Files
       if (data.files && data.files.length > 0) {
         document.getElementById('dash-files-section').classList.remove('hidden');
-        document.getElementById('dash-files').innerHTML = data.files.map(f => `
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-600">${escapeHtml(f.original_name)}</span>
-            <span class="text-xs px-2 py-0.5 rounded-full ${f.processing_status === 'extracted' ? 'bg-green-50 text-emerald-500' : 'bg-gray-100 text-gray-400'}">${f.processing_status}</span>
-          </div>
-        `).join('');
+        const filesEl = document.getElementById('dash-files');
+        filesEl.innerHTML = '';
+        data.files.forEach(f => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between text-sm';
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'text-gray-600';
+          nameSpan.textContent = f.original_name;
+          const statusSpan = document.createElement('span');
+          const isExtracted = f.processing_status === 'extracted';
+          statusSpan.className = `text-xs px-2 py-0.5 rounded-full ${isExtracted ? 'bg-green-50 text-emerald-500' : 'bg-gray-100 text-gray-400'}`;
+          statusSpan.textContent = f.processing_status;
+          row.appendChild(nameSpan);
+          row.appendChild(statusSpan);
+          filesEl.appendChild(row);
+        });
       }
 
       // Events

@@ -7,7 +7,7 @@
   <meta name="description" content="Set up your AI receptionist in minutes. Upload your business documents and Sofia learns everything about your business.">
   <meta name="author" content="Z.E Digital Tech">
   <meta name="theme-color" content="#8B5CF6">
-  <link rel="canonical" href="https://zedigitaltech.github.io/sofia-web/onboard.html">
+  <meta name="robots" content="noindex,nofollow">
   <link rel="stylesheet" href="styles-tailwind.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -70,7 +70,7 @@
         <div>
           <div class="flex items-center gap-2 mb-1">
             <span class="text-sm font-bold text-violet" id="plan-badge">Starter</span>
-            <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day money-back guarantee</span>
+            <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day free trial</span>
           </div>
           <p class="text-2xl font-extrabold text-dark">&euro;<span id="plan-price">79</span><span class="text-sm font-normal text-gray-400">/mo</span></p>
           <p class="text-xs text-gray-400 mt-0.5" id="plan-features">1 location, 2 languages, 500 calls/mo</p>
@@ -320,7 +320,7 @@
           <div class="bg-violet-bg border border-violet/20 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
               <p class="text-sm font-semibold text-dark">Your Plan: <span id="dash-plan-name" class="text-violet">Starter</span></p>
-              <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day money-back guarantee</span>
+              <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day free trial</span>
             </div>
             <p class="text-xs text-gray-500">Your trial starts today. No payment required until <span id="dash-trial-end" class="font-medium text-dark"></span>.</p>
           </div>
@@ -411,34 +411,7 @@
     document.getElementById('plan-price').textContent = planInfo.price;
     document.getElementById('plan-features').textContent = planInfo.features;
 
-    // Resume existing session if available
-    const storedClientId = sessionStorage.getItem('sofia_clientId');
-    const storedToken = sessionStorage.getItem('sofia_clientToken');
     const isEditMode = urlParams.get('edit') === '1';
-    if (storedClientId && storedToken && !urlParams.get('plan')) {
-      clientId = storedClientId;
-      clientToken = storedToken;
-      if (isEditMode) {
-        // Coming from dashboard "Edit Knowledge" — go straight to upload step
-        showStep(2);
-      } else {
-        fetch(`${API_BASE}/${clientId}/status`, { headers: authHeaders() })
-          .then(res => res.json())
-          .then(data => {
-            if (data.client) {
-              if (data.client.status === 'active') {
-                window.location.href = 'dashboard.html';
-              } else {
-                showStep(2);
-              }
-            }
-          })
-          .catch(() => {
-            sessionStorage.removeItem('sofia_clientId');
-            sessionStorage.removeItem('sofia_clientToken');
-          });
-      }
-    }
 
     // Step navigation
     function showStep(step) {
@@ -478,8 +451,7 @@
         if (data.clientId) {
           clientId = data.clientId;
           clientToken = data.clientToken;
-          sessionStorage.setItem('sofia_clientId', clientId);
-          sessionStorage.setItem('sofia_clientToken', clientToken);
+
 
           const websiteUrl = document.getElementById('biz-website').value;
           if (websiteUrl) {
