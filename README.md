@@ -18,8 +18,8 @@ Static site served via GitHub Pages from `main` branch root. CSS is compiled fro
 |---|---|
 | `index.html` | Landing page |
 | `features.html`, `pricing.html`, `demo.html`, `faq.html` | Product pages |
-| `onboard.html` | Client onboarding wizard (preview only — calls `api.sofia.zedigital.tech`, not yet deployed) |
-| `dashboard.html` | Client dashboard (preview only — calls `api.sofia.zedigital.tech`, not yet deployed) |
+| `onboard.html` | Client onboarding wizard — page is live but non-functional (API backend `api.sofia.zedigital.tech` not yet deployed). Marked `noindex`. |
+| `dashboard.html` | Client dashboard — page is live but non-functional (same API dependency). Marked `noindex`. |
 | `privacy.html`, `terms.html` | Legal |
 | `main.js`, `styles.css` | Shared client code and styles |
 | `styles-tailwind.css` | Compiled Tailwind CSS (generated — do not edit by hand) |
