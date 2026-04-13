@@ -425,11 +425,20 @@
 
       // Status badge
       const badge = document.getElementById('dash-status-badge');
+      const dot = document.createElement('span');
+      const label = document.createElement('span');
+      badge.innerHTML = '';
       if (c.status === 'active') {
-        badge.innerHTML = '<span class="w-2 h-2 bg-success rounded-full"></span><span class="text-xs text-success">Active</span>';
+        dot.className = 'w-2 h-2 bg-success rounded-full';
+        label.className = 'text-xs text-success';
+        label.textContent = 'Active';
       } else {
-        badge.innerHTML = '<span class="w-2 h-2 bg-amber-400 rounded-full"></span><span class="text-xs text-amber-400">' + (c.status || 'pending').replace(/_/g, ' ') + '</span>';
+        dot.className = 'w-2 h-2 bg-amber-400 rounded-full';
+        label.className = 'text-xs text-amber-400';
+        label.textContent = (c.status || 'pending').replace(/_/g, ' ');
       }
+      badge.appendChild(dot);
+      badge.appendChild(label);
 
       // Account details
       document.getElementById('dash-email').textContent = c.email || '--';

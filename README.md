@@ -12,17 +12,28 @@ Voice pipeline: Zadarma SIP → LiveKit SIP trunk → LiveKit Agents worker → 
 
 ## What lives here
 
-Static site served via GitHub Pages from `main` branch root. No build step.
+Static site served via GitHub Pages from `main` branch root. CSS is compiled from Tailwind source — see "CSS build" below.
 
 | File | Purpose |
 |---|---|
 | `index.html` | Landing page |
 | `features.html`, `pricing.html`, `demo.html`, `faq.html` | Product pages |
-| `onboard.html` | Client onboarding form |
-| `dashboard.html` | Client dashboard (calls `api.sofia.zedigital.tech` — not yet deployed) |
+| `onboard.html` | Client onboarding wizard (preview only — calls `api.sofia.zedigital.tech`, not yet deployed) |
+| `dashboard.html` | Client dashboard (preview only — calls `api.sofia.zedigital.tech`, not yet deployed) |
 | `privacy.html`, `terms.html` | Legal |
 | `main.js`, `styles.css` | Shared client code and styles |
+| `styles-tailwind.css` | Compiled Tailwind CSS (generated — do not edit by hand) |
 | `manifest.json`, `robots.txt`, `sitemap.xml`, `.nojekyll` | PWA / SEO / Pages config |
+
+## CSS build
+
+```bash
+npm install
+npm run build:css   # one-off build
+npm run watch:css   # watch mode during development
+```
+
+A GitHub Action (`build-css.yml`) rebuilds and commits `styles-tailwind.css` automatically on every push that touches HTML, JS, or Tailwind config files.
 
 ## Local preview
 

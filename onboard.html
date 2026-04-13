@@ -70,7 +70,7 @@
         <div>
           <div class="flex items-center gap-2 mb-1">
             <span class="text-sm font-bold text-violet" id="plan-badge">Starter</span>
-            <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day free trial</span>
+            <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day money-back guarantee</span>
           </div>
           <p class="text-2xl font-extrabold text-dark">&euro;<span id="plan-price">79</span><span class="text-sm font-normal text-gray-400">/mo</span></p>
           <p class="text-xs text-gray-400 mt-0.5" id="plan-features">1 location, 2 languages, 500 calls/mo</p>
@@ -320,7 +320,7 @@
           <div class="bg-violet-bg border border-violet/20 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
               <p class="text-sm font-semibold text-dark">Your Plan: <span id="dash-plan-name" class="text-violet">Starter</span></p>
-              <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day free trial</span>
+              <span class="bg-green-50 text-emerald-500 text-xs font-bold px-2 py-0.5 rounded-full">14-day money-back guarantee</span>
             </div>
             <p class="text-xs text-gray-500">Your free trial starts today. No payment required until <span id="dash-trial-end" class="font-medium text-dark"></span>.</p>
           </div>
@@ -802,13 +802,23 @@
             const statusData = await statusRes.json();
             const eventsEl = document.getElementById('dash-events');
             if (statusData.events) {
-              eventsEl.innerHTML = statusData.events.slice(0, 5).map(ev => `
-                <div class="flex items-center gap-3 text-sm">
-                  <span class="w-2 h-2 bg-violet rounded-full flex-shrink-0"></span>
-                  <span class="text-gray-600">${ev.event_type.replace(/_/g, ' ')}</span>
-                  <span class="text-gray-400 text-xs ml-auto">${new Date(ev.created_at).toLocaleTimeString()}</span>
-                </div>
-              `).join('');
+              eventsEl.innerHTML = '';
+              statusData.events.slice(0, 5).forEach(ev => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center gap-3 text-sm';
+                const dot = document.createElement('span');
+                dot.className = 'w-2 h-2 bg-violet rounded-full flex-shrink-0';
+                const evLabel = document.createElement('span');
+                evLabel.className = 'text-gray-600';
+                evLabel.textContent = ev.event_type.replace(/_/g, ' ');
+                const evTime = document.createElement('span');
+                evTime.className = 'text-gray-400 text-xs ml-auto';
+                evTime.textContent = new Date(ev.created_at).toLocaleTimeString();
+                row.appendChild(dot);
+                row.appendChild(evLabel);
+                row.appendChild(evTime);
+                eventsEl.appendChild(row);
+              });
             }
           } catch {}
 
