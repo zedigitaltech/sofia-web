@@ -1,0 +1,12 @@
+{
+  "name": "sofia-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i input.css -o styles-tailwind.css --minify",
+    "watch:css": "tailwindcss -i input.css -o styles-tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

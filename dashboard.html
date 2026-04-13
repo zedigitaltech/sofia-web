@@ -6,26 +6,7 @@
   <title>Dashboard — Sofia AI</title>
   <meta name="description" content="Manage your Sofia AI receptionist. View your plan, knowledge base, and account settings.">
   <meta name="theme-color" content="#8B5CF6">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            violet: '#8B5CF6',
-            'violet-light': '#A78BFA',
-            'violet-dark': '#7C3AED',
-            'violet-bg': '#F5F3FF',
-            dark: '#0F0D1A',
-            'dark-subtle': '#1A1726',
-            success: '#10B981',
-            navy: '#1B2A4A',
-            gold: '#C9A84C',
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="styles-tailwind.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     body { font-family: 'Inter', sans-serif; }
@@ -452,7 +433,7 @@
 
       // Account details
       document.getElementById('dash-email').textContent = c.email || '--';
-      document.getElementById('dash-phone').textContent = c.twilio_number || 'Pending Setup';
+      document.getElementById('dash-phone').textContent = c.sip_number || c.twilio_number || 'Pending Setup';
       document.getElementById('dash-language').textContent = (c.language || 'en').toUpperCase();
       document.getElementById('dash-phone-mode').textContent = c.phone_mode === 'byod' ? 'Forward Existing' : 'New Number';
       document.getElementById('dash-kb-version').textContent = c.knowledge_version ? `v${c.knowledge_version}` : 'Not set';
@@ -527,16 +508,29 @@
 
       // Events
       const eventsEl = document.getElementById('dash-events');
+      eventsEl.innerHTML = '';
       if (data.events && data.events.length > 0) {
-        eventsEl.innerHTML = data.events.slice(0, 8).map(ev => `
-          <div class="flex items-center gap-3 text-sm">
-            <span class="w-2 h-2 bg-violet rounded-full flex-shrink-0"></span>
-            <span class="text-gray-600 flex-1">${ev.event_type.replace(/_/g, ' ')}</span>
-            <span class="text-gray-400 text-xs">${new Date(ev.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-          </div>
-        `).join('');
+        data.events.slice(0, 8).forEach(ev => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center gap-3 text-sm';
+          const dot = document.createElement('span');
+          dot.className = 'w-2 h-2 bg-violet rounded-full flex-shrink-0';
+          const label = document.createElement('span');
+          label.className = 'text-gray-600 flex-1';
+          label.textContent = String(ev.event_type || '').replace(/_/g, ' ');
+          const ts = document.createElement('span');
+          ts.className = 'text-gray-400 text-xs';
+          ts.textContent = new Date(ev.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+          row.appendChild(dot);
+          row.appendChild(label);
+          row.appendChild(ts);
+          eventsEl.appendChild(row);
+        });
       } else {
-        eventsEl.innerHTML = '<p class="text-xs text-gray-400">No events yet.</p>';
+        const msg = document.createElement('p');
+        msg.className = 'text-xs text-gray-400';
+        msg.textContent = 'No events yet.';
+        eventsEl.appendChild(msg);
       }
 
       // Support link

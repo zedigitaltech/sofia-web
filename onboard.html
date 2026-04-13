@@ -8,27 +8,7 @@
   <meta name="author" content="Z.E Digital Tech">
   <meta name="theme-color" content="#8B5CF6">
   <link rel="canonical" href="https://zedigitaltech.github.io/sofia-web/onboard.html">
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            violet: '#8B5CF6',
-            'violet-light': '#A78BFA',
-            'violet-dark': '#7C3AED',
-            'violet-bg': '#F5F3FF',
-            dark: '#0F0D1A',
-            'dark-subtle': '#1A1726',
-            success: '#10B981',
-            navy: '#1B2A4A',
-            gold: '#C9A84C',
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="styles-tailwind.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     body { font-family: 'Inter', sans-serif; }
@@ -546,18 +526,34 @@
     }
 
     function renderFileList() {
-      fileList.innerHTML = selectedFiles.map((f, i) => `
-        <div class="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
-          <div class="flex items-center gap-3">
-            <span class="text-lg">${getFileIcon(f.name)}</span>
-            <div>
-              <p class="text-sm font-medium text-gray-700">${f.name}</p>
-              <p class="text-xs text-gray-400">${(f.size / 1024).toFixed(1)} KB</p>
-            </div>
-          </div>
-          <button onclick="removeFile(${i})" class="text-gray-400 hover:text-red-500 transition">&times;</button>
-        </div>
-      `).join('');
+      fileList.innerHTML = '';
+      selectedFiles.forEach((f, i) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3';
+        const icon = document.createElement('span');
+        icon.className = 'text-lg';
+        icon.textContent = getFileIcon(f.name);
+        const nameEl = document.createElement('p');
+        nameEl.className = 'text-sm font-medium text-gray-700';
+        nameEl.textContent = f.name;
+        const sizeEl = document.createElement('p');
+        sizeEl.className = 'text-xs text-gray-400';
+        sizeEl.textContent = (f.size / 1024).toFixed(1) + ' KB';
+        const info = document.createElement('div');
+        info.appendChild(nameEl);
+        info.appendChild(sizeEl);
+        const left = document.createElement('div');
+        left.className = 'flex items-center gap-3';
+        left.appendChild(icon);
+        left.appendChild(info);
+        const btn = document.createElement('button');
+        btn.className = 'text-gray-400 hover:text-red-500 transition';
+        btn.textContent = '\u00d7';
+        btn.onclick = () => removeFile(i);
+        row.appendChild(left);
+        row.appendChild(btn);
+        fileList.appendChild(row);
+      });
       uploadBtn.disabled = selectedFiles.length === 0;
     }
 
