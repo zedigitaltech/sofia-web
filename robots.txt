@@ -1,13 +1,13 @@
 # Sofia AI - robots.txt
-# https://zedigitaltech.github.io/sofia-web/
+# https://sofia.zedigital.tech/
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://zedigitaltech.github.io/sofia-web/sitemap.xml
+Sitemap: https://sofia.zedigital.tech/sitemap.xml
 
-# Crawl-delay (optional, be nice to GitHub Pages)
+# Crawl-delay (optional, be nice to bots)
 Crawl-delay: 1
 
 # Block common bot traps
